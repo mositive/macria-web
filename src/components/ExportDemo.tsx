@@ -34,19 +34,19 @@ export function ExportDemo() {
   const finished = done >= parts.length;
 
   return (
-    <section id="dxf" className="relative px-5 py-24 sm:px-8 sm:py-32">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2 lg:gap-16">
+    <section id="dxf" className="relative px-4 py-20 sm:px-8 sm:py-32">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 sm:gap-14 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <h2 className="font-display text-3xl leading-tight font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
             Yüz Parçalık Montajda Da Tek Tuş.
           </h2>
-          <p className="mt-4 text-slate-400 sm:text-lg">
+          <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
             Parçaları tek tek açıp &quot;Save As DXF&quot; demek yerine listeyi seçip başlatın.
             Macria panelleri sizin yerinize sürer; her adımda hangi parçada olduğunuzu
             gösteren küçük pencere bütün uygulamaların üstünde kalır.
           </p>
 
-          <ul className="mt-8 space-y-3.5">
+          <ul className="mt-7 space-y-3.5 sm:mt-8">
             {[
               "Seçili parça ya da listenin tamamı",
               "Üstte duran ilerleme penceresi (PiP)",
@@ -94,8 +94,8 @@ export function ExportDemo() {
             </div>
 
             {/* tablo */}
-            <div className="p-4">
-              <div className="grid grid-cols-[1fr_3.2rem_2.6rem_1.6rem] gap-2 border-b border-line/60 px-2 pb-2 font-mono text-[10px] tracking-wider text-slate-500 uppercase">
+            <div className="p-3 sm:p-4">
+              <div className="grid grid-cols-[1fr_2.6rem_2.2rem_1.4rem] gap-2 border-b border-line/60 px-1.5 pb-2 font-mono text-[10px] tracking-wider text-slate-500 uppercase sm:grid-cols-[1fr_3.2rem_2.6rem_1.6rem] sm:px-2">
                 <span>Parça</span>
                 <span className="text-right">Kal.</span>
                 <span className="text-right">Adet</span>
@@ -108,7 +108,7 @@ export function ExportDemo() {
                   return (
                     <li
                       key={p.ad}
-                      className={`grid grid-cols-[1fr_3.2rem_2.6rem_1.6rem] items-center gap-2 rounded-lg px-2 py-2 text-xs transition-colors duration-300 ${
+                      className={`grid grid-cols-[1fr_2.6rem_2.2rem_1.4rem] items-center gap-2 rounded-lg px-1.5 py-2 text-xs transition-colors duration-300 sm:grid-cols-[1fr_3.2rem_2.6rem_1.6rem] sm:px-2 ${
                         state === "run" ? "bg-brand-500/10" : ""
                       }`}
                     >
@@ -174,14 +174,14 @@ export function ExportDemo() {
             </div>
 
             {/* ilerleme */}
-            <div className="border-t border-line/70 bg-white/[0.02] px-5 py-4">
-              <div className="flex items-center justify-between font-mono text-[11px]">
-                <span className={finished ? "text-accent" : "text-slate-400"}>
+            <div className="border-t border-line/70 bg-white/[0.02] px-4 py-4 sm:px-5">
+              <div className="flex items-center justify-between gap-3 font-mono text-[11px]">
+                <span className={`truncate ${finished ? "text-accent" : "text-slate-400"}`}>
                   {finished
                     ? "Aktarım tamamlandı"
                     : `Aktarılıyor — ${parts[Math.min(done, parts.length - 1)].ad}`}
                 </span>
-                <span className="text-slate-300">
+                <span className="shrink-0 text-slate-300">
                   {Math.min(done, parts.length)}/{parts.length}
                 </span>
               </div>
@@ -195,13 +195,14 @@ export function ExportDemo() {
             </div>
           </div>
 
-          {/* üstte duran küçük ilerleme penceresi */}
+          {/* Üstte duran küçük ilerleme penceresi. Mobilde kartın üstüne binip
+              sağdan taştığı için orada akışa dahil, altına yerleşiyor. */}
           <motion.div
             initial={{ opacity: 0, y: 18, scale: 0.94 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute -right-3 -bottom-7 w-[15rem] rounded-xl border border-brand-400/25 bg-ink-2/95 p-3.5 shadow-2xl shadow-brand-950/80 backdrop-blur-xl sm:-right-8"
+            className="mt-4 w-full rounded-xl border border-brand-400/25 bg-ink-2/95 p-3.5 shadow-2xl shadow-brand-950/80 backdrop-blur-xl sm:absolute sm:-right-8 sm:-bottom-7 sm:mt-0 sm:w-[15rem]"
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] tracking-wider text-brand-300 uppercase">

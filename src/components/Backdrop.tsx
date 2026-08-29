@@ -3,6 +3,10 @@
 /**
  * Sayfanın arkasında duran sabit katman: izometrik tel kafes, yukarı kayan
  * ızgara ve iki yumuşak ışık lekesi. Tamamı CSS ile çizilir, JS çalışmaz.
+ *
+ * Mobilde ışık lekeleri küçültülür ve bulanıklık yarıya iner; kayan ızgara
+ * animasyonu da kapatılır — telefon GPU'sunda tam ekran blur + sürekli
+ * yeniden boyama kaydırmayı takıldırıyordu.
  */
 export function Backdrop() {
   return (
@@ -11,7 +15,7 @@ export function Backdrop() {
 
       {/* izometrik tel kafes */}
       <div
-        className="absolute inset-0 animate-drift opacity-[0.28]"
+        className="absolute inset-0 animate-none opacity-[0.28] md:animate-drift"
         style={{
           backgroundImage:
             "linear-gradient(30deg, rgba(46,110,224,0.16) 1px, transparent 1px)," +
@@ -32,12 +36,12 @@ export function Backdrop() {
       />
 
       {/* ışık lekeleri */}
-      <div className="absolute -top-40 left-1/2 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full bg-brand-600/18 blur-[130px]" />
-      <div className="absolute top-[38%] -right-40 h-[34rem] w-[34rem] rounded-full bg-accent/10 blur-[140px]" />
-      <div className="absolute bottom-0 -left-32 h-[32rem] w-[32rem] rounded-full bg-brand-800/25 blur-[120px]" />
+      <div className="absolute -top-32 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-600/18 blur-[70px] sm:-top-40 sm:h-[46rem] sm:w-[46rem] sm:blur-[130px]" />
+      <div className="absolute top-[38%] -right-24 h-[20rem] w-[20rem] rounded-full bg-accent/10 blur-[70px] sm:-right-40 sm:h-[34rem] sm:w-[34rem] sm:blur-[140px]" />
+      <div className="absolute bottom-0 -left-20 h-[18rem] w-[18rem] rounded-full bg-brand-800/25 blur-[70px] sm:-left-32 sm:h-[32rem] sm:w-[32rem] sm:blur-[120px]" />
 
       {/* alt karartma */}
-      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-ink to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent sm:h-64" />
     </div>
   );
 }

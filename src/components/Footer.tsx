@@ -3,7 +3,7 @@ import { nav, site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-line/70 px-5 py-12 sm:px-8">
+    <footer className="relative border-t border-line/70 px-4 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-12">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <Image
@@ -19,12 +19,12 @@ export function Footer() {
           </div>
         </div>
 
-        <nav className="flex flex-wrap gap-x-6 gap-y-2">
+        <nav className="flex flex-wrap gap-x-6 gap-y-1">
           {nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-slate-400 transition-colors hover:text-white"
+              className="py-1.5 text-sm text-slate-400 transition-colors hover:text-white"
             >
               {item.label}
             </a>
@@ -33,7 +33,7 @@ export function Footer() {
             href={site.github}
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-slate-400 transition-colors hover:text-white"
+            className="py-1.5 text-sm text-slate-400 transition-colors hover:text-white"
           >
             GitHub
           </a>

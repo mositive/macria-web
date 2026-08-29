@@ -106,13 +106,15 @@ function Card({ f }: { f: Feature }) {
   return (
     <motion.div
       onPointerMove={(e) => {
+        // Dokunmatikte parmak sürüklerken ışık lekesini kovalamanın anlamı yok.
+        if (e.pointerType !== "mouse") return;
         const r = e.currentTarget.getBoundingClientRect();
         mx.set(e.clientX - r.left);
         my.set(e.clientY - r.top);
       }}
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="group glass relative h-full overflow-hidden rounded-2xl p-6 transition-colors duration-300 hover:border-brand-400/35"
+      className="group glass relative h-full overflow-hidden rounded-2xl p-5 transition-colors duration-300 hover:border-brand-400/35 sm:p-6"
     >
       <motion.div style={{ background: spot }} className="pointer-events-none absolute inset-0" />
 
@@ -125,7 +127,7 @@ function Card({ f }: { f: Feature }) {
             {f.icon}
           </svg>
         </span>
-        <h3 className="mt-5 font-display text-lg font-semibold text-white">{f.t}</h3>
+        <h3 className="mt-4 font-display text-lg font-semibold text-white sm:mt-5">{f.t}</h3>
         <p className="mt-2.5 text-sm leading-relaxed text-slate-400">{f.d}</p>
       </div>
     </motion.div>
@@ -134,19 +136,19 @@ function Card({ f }: { f: Feature }) {
 
 export function Features() {
   return (
-    <section id="ozellikler" className="relative px-5 py-24 sm:px-8 sm:py-32">
+    <section id="ozellikler" className="relative px-4 py-20 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <Reveal className="max-w-2xl">
-          <h2 className="font-display text-3xl leading-tight font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-5xl">
             Bir Uygulama, Büyüyen Bir Araç Seti.
           </h2>
-          <p className="mt-4 text-slate-400 sm:text-lg">
+          <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
             Her iş için ayrı makro dosyası aramak yerine hepsi tek pencerede.
             Aşağıdakiler bugün hazır — liste her sürümde uzuyor.
           </p>
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="mt-10 grid gap-3.5 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {features.map((f) => (
             <RevealItem key={f.t}>
               <Card f={f} />
@@ -159,7 +161,7 @@ export function Features() {
               href={`${site.github}/issues`}
               target="_blank"
               rel="noreferrer"
-              className="group flex h-full flex-col justify-between rounded-2xl border border-dashed border-brand-500/25 bg-brand-500/[0.04] p-6 transition-colors hover:border-brand-400/50 hover:bg-brand-500/[0.08]"
+              className="group flex h-full flex-col justify-between rounded-2xl border border-dashed border-brand-500/25 bg-brand-500/[0.04] p-5 transition-colors hover:border-brand-400/50 hover:bg-brand-500/[0.08] sm:p-6"
             >
               <div>
                 <span className="flex size-11 items-center justify-center rounded-xl border border-brand-500/25 bg-brand-500/10 text-brand-300 transition-transform duration-300 group-hover:scale-105">
@@ -167,7 +169,7 @@ export function Features() {
                     <path d="M12 5v14M5 12h14" />
                   </svg>
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-white">
+                <h3 className="mt-4 font-display text-lg font-semibold text-white sm:mt-5">
                   Sırada ne olsun?
                 </h3>
                 <p className="mt-2.5 text-sm leading-relaxed text-slate-400">

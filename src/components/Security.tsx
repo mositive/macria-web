@@ -28,7 +28,7 @@ function VirusTotalPaneli() {
   // Rapor henüz yoksa panel boş durmasın: kullanıcı dosyayı kendi doğrulasın.
   if (!vt) {
     return (
-      <div className="glass relative overflow-hidden rounded-2xl border-dashed p-8 sm:p-10">
+      <div className="glass relative overflow-hidden rounded-2xl border-dashed p-5 sm:p-10">
         <span className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-brand-500/10 blur-[90px]" />
 
         <div className="relative">
@@ -50,7 +50,7 @@ function VirusTotalPaneli() {
               <button
                 type="button"
                 onClick={ozetiKopyala}
-                className="rounded-lg border border-line px-3 py-1.5 font-mono text-[10px] tracking-[0.14em] text-slate-400 uppercase transition-colors hover:border-brand-400/50 hover:text-white"
+                className="rounded-lg border border-line px-3.5 py-2.5 font-mono text-[10px] tracking-[0.14em] text-slate-400 uppercase transition-colors hover:border-brand-400/50 hover:text-white"
               >
                 {kopyalandi ? "Kopyalandı" : "Kopyala"}
               </button>
@@ -65,12 +65,12 @@ function VirusTotalPaneli() {
               İndirdiğiniz dosyanın bulunduğu klasörde PowerShell&apos;i açıp şunu
               çalıştırın — çıkan özet yukarıdakiyle birebir aynı olmalı:
             </p>
-            <code className="mt-2 block overflow-x-auto font-mono text-[11px] whitespace-nowrap text-brand-300">
+            <code className="scroll-x mt-2 block font-mono text-[11px] whitespace-nowrap text-brand-300">
               Get-FileHash .\{release.dosya} -Algorithm SHA256
             </code>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+          <div className="mt-6 flex flex-col gap-x-7 gap-y-4 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href={`https://www.virustotal.com/gui/file/${release.sha256}`}
               target="_blank"
@@ -106,12 +106,13 @@ function VirusTotalPaneli() {
       href={vt.url}
       target="_blank"
       rel="noreferrer"
-      className="group glass relative block overflow-hidden rounded-2xl p-8 transition-colors hover:border-brand-400/40 sm:p-10"
+      className="group glass relative block overflow-hidden rounded-2xl p-5 transition-colors hover:border-brand-400/40 sm:p-10"
     >
       <span className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-brand-500/10 blur-[90px]" />
 
-      <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-7">
+      <div className="relative flex flex-col gap-6 sm:gap-8 md:flex-row md:items-center md:justify-between">
+        {/* Mobilde alt alta: oran + ayraç + açıklama tek satıra sığmıyordu. */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
           {/* oran */}
           <div>
             <div className="font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
@@ -123,17 +124,17 @@ function VirusTotalPaneli() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className={`font-display text-6xl leading-none font-semibold ${
+                className={`font-display text-5xl leading-none font-semibold sm:text-6xl ${
                   temiz ? "text-accent" : "text-amber-300"
                 }`}
               >
                 {vt.tespit}
               </motion.span>
-              <span className="font-display text-2xl text-slate-500">/ {vt.toplam}</span>
+              <span className="font-display text-xl text-slate-500 sm:text-2xl">/ {vt.toplam}</span>
             </div>
           </div>
 
-          <div className="h-16 w-px bg-line" />
+          <div className="hidden h-16 w-px bg-line sm:block" />
 
           <div>
             <p className="max-w-xs text-sm leading-relaxed text-slate-300">
@@ -148,7 +149,7 @@ function VirusTotalPaneli() {
           </div>
         </div>
 
-        <span className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-line bg-white/[0.03] px-5 py-3 text-sm font-medium text-slate-200 transition-all group-hover:border-brand-400/50 group-hover:text-white">
+        <span className="inline-flex shrink-0 items-center justify-center gap-2 self-stretch rounded-xl border border-line bg-white/[0.03] px-5 py-3.5 text-sm font-medium text-slate-200 transition-all group-hover:border-brand-400/50 group-hover:text-white md:self-auto md:py-3">
           Raporu aç
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
             <path d="M5 12h14M13 6l6 6-6 6" />
@@ -157,8 +158,8 @@ function VirusTotalPaneli() {
       </div>
 
       {/* her motor için bir çentik; sırayla yanarak taramayı anlatır */}
-      <div className="relative mt-8 border-t border-line/60 pt-6">
-        <div className="flex flex-wrap justify-center gap-[5px]">
+      <div className="relative mt-7 border-t border-line/60 pt-5 sm:mt-8 sm:pt-6">
+        <div className="flex flex-wrap justify-center gap-[4px] sm:gap-[5px]">
           {Array.from({ length: vt.toplam }).map((_, i) => (
             <motion.span
               key={i}
@@ -182,13 +183,13 @@ function VirusTotalPaneli() {
 
 export function Security() {
   return (
-    <section id="guvenlik" className="relative px-5 py-24 sm:px-8 sm:py-32">
+    <section id="guvenlik" className="relative px-4 py-20 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-5xl">
         <Reveal className="max-w-2xl">
-          <h2 className="font-display text-3xl leading-tight font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-5xl">
             İndirdiğiniz Dosyanın Ne Olduğunu Bilin.
           </h2>
-          <p className="mt-4 text-slate-400 sm:text-lg">
+          <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
             Kurumsal bir makineye indirdiğiniz imzasız bir exe&apos;ye körü körüne
             güvenmenizi beklemiyoruz.{" "}
             {virustotal
@@ -213,7 +214,7 @@ export function Security() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-4 flex flex-col gap-3 rounded-2xl border border-line/60 bg-white/[0.02] p-5 text-xs leading-relaxed text-slate-400 sm:flex-row sm:items-center"
+          className="mt-4 flex flex-col gap-3 rounded-2xl border border-line/60 bg-white/[0.02] p-4 text-xs leading-relaxed text-slate-400 sm:flex-row sm:items-center sm:p-5"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-300">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />

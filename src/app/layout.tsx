@@ -43,6 +43,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#04060d",
+  // Mobil tarayıcı kendi arayüzünü ve form denetimlerini koyu şemaya göre çizsin.
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

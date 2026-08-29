@@ -47,7 +47,17 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  /* Sabit başlık mobilde daha alçak; çapa hedefi başlığın altında kalsın. */
+  scroll-padding-top: 4.5rem;
+  /* iOS yatay çevrildiğinde metni kendiliğinden büyütmesin. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 5.5rem;
+  }
 }
 
 body {
@@ -56,6 +66,17 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Dokunmatikte gri kutu parlamasını kaldır; hover/focus stilleri zaten var. */
+  -webkit-tap-highlight-color: transparent;
+  /* Sayfa sonunda aşırı kaydırma zincirlemesini engelle. */
+  overscroll-behavior-y: none;
+}
+
+/* Yatay kayan tablo/kod blokları parmakla akıcı sürüklensin. */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 ::selection {
@@ -63,12 +84,15 @@ body {
   color: #fff;
 }
 
+/* Kaydırma çubuğu süsü yalnızca imleçli/geniş ekranlarda; mobilde yer kaplamasın. */
+@media (min-width: 768px) {
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: #05080f; }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--color-brand-700), var(--color-brand-500));
   border-radius: 999px;
   border: 2px solid #05080f;
+}
 }
 
 @utility text-gradient {

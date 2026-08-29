@@ -52,6 +52,9 @@ export function Hero() {
     <section
       ref={ref}
       onPointerMove={(e) => {
+        // Yalnızca fare: dokunmatikte parmak kaydırırken de tetikleniyor,
+        // her karede yay animasyonu çalışıp kaydırmayı takıldırıyordu.
+        if (e.pointerType !== "mouse") return;
         const r = e.currentTarget.getBoundingClientRect();
         mx.set((e.clientX - r.left) / r.width - 0.5);
         my.set((e.clientY - r.top) / r.height - 0.5);
@@ -60,16 +63,17 @@ export function Hero() {
         mx.set(0);
         my.set(0);
       }}
-      className="relative flex min-h-svh items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8"
+      className="relative flex min-h-svh items-center overflow-hidden px-4 pt-24 pb-14 sm:px-8 sm:pt-28 sm:pb-16"
     >
       <motion.div
         style={{ y: heroY, opacity: heroOpacity }}
-        className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8"
+        className="mx-auto grid w-full max-w-7xl items-center gap-8 sm:gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8"
       >
         {/* --- metin --- */}
-        <div className="relative z-10">
+        <div className="relative z-10 lg:order-1">
           {/* satırlar tek satırda kalsın diye kısa tutuldu; ölçüler ona göre */}
-          <h1 className="font-display text-[2.1rem] leading-[1.08] font-semibold tracking-tight text-white sm:text-5xl lg:text-[3.7rem]">
+          {/* 320 px'lik ekranlarda da satırlar bölünmesin diye viewport'a bağlı */}
+          <h1 className="font-display text-[clamp(1.75rem,8.4vw,2.1rem)] leading-[1.08] font-semibold tracking-tight text-white sm:text-5xl lg:text-[3.7rem]">
             <motion.span custom={0} variants={line} initial="hidden" animate="show" className="block">
               Tekrar eden işler
             </motion.span>
@@ -86,7 +90,7 @@ export function Hero() {
             variants={line}
             initial="hidden"
             animate="show"
-            className="mt-6 max-w-md text-base leading-relaxed text-slate-400 sm:text-lg"
+            className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-slate-400 sm:mt-6 sm:text-lg"
           >
             3DEXPERIENCE&apos;taki açık montaja bağlanır, tekrarlı işleri sizin yerinize
             yapar.
@@ -97,13 +101,13 @@ export function Hero() {
             variants={line}
             initial="hidden"
             animate="show"
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-8 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center"
           >
             <a
               href="#indir"
-              className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-3.5 font-medium text-white shadow-xl shadow-brand-600/30 transition-all hover:shadow-2xl hover:shadow-brand-500/45"
+              className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-3.5 text-center font-medium text-white shadow-xl shadow-brand-600/30 transition-all hover:shadow-2xl hover:shadow-brand-500/45"
             >
-              <span className="relative z-10 flex items-center gap-2.5">
+              <span className="relative z-10 flex items-center justify-center gap-2.5">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="transition-transform group-hover:translate-y-0.5">
                   <path d="M12 3v13M6 11l6 6 6-6M4 21h16" />
                 </svg>
@@ -113,7 +117,7 @@ export function Hero() {
             </a>
             <a
               href="#akis"
-              className="rounded-xl border border-line bg-white/[0.03] px-6 py-3.5 font-medium text-slate-200 backdrop-blur transition-all hover:border-brand-500/45 hover:bg-white/[0.06] hover:text-white"
+              className="rounded-xl border border-line bg-white/[0.03] px-6 py-3.5 text-center font-medium text-slate-200 backdrop-blur transition-all hover:border-brand-500/45 hover:bg-white/[0.06] hover:text-white"
             >
               Nasıl çalışır?
             </a>
@@ -150,7 +154,7 @@ export function Hero() {
             variants={line}
             initial="hidden"
             animate="show"
-            className="mt-9 grid max-w-lg grid-cols-2 gap-x-6 gap-y-5 border-t border-line/70 pt-7 sm:grid-cols-4"
+            className="mt-8 grid max-w-lg grid-cols-2 gap-x-5 gap-y-4 border-t border-line/70 pt-6 sm:mt-9 sm:gap-x-6 sm:gap-y-5 sm:pt-7 sm:grid-cols-4"
           >
             {stats.map((s) => (
               <div key={s.k}>
@@ -163,12 +167,15 @@ export function Hero() {
           </motion.dl>
         </div>
 
-        {/* --- logo sahnesi --- */}
+        {/* --- logo sahnesi ---
+            Mobilde başlığın ÜSTÜNDE ve küçük duruyor: tek sütuna inildiğinde
+            ızgarada ikinci sırada kaldığı için metnin, rozetin ve künyenin
+            altına, ekranın çok aşağısına düşüyordu. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto flex aspect-square w-full max-w-[30rem] items-center justify-center"
+          className="relative -order-1 mx-auto flex aspect-square w-full max-w-[12rem] items-center justify-center sm:max-w-[16rem] lg:order-2 lg:max-w-[30rem]"
           style={{ perspective: 1200 }}
         >
           {/* nabız halkaları */}
@@ -205,22 +212,23 @@ export function Hero() {
               width={420}
               height={420}
               priority
-              className="w-[16rem] drop-shadow-[0_18px_60px_rgba(20,79,214,0.55)] sm:w-[19rem]"
+              className="w-[7.5rem] drop-shadow-[0_18px_60px_rgba(20,79,214,0.55)] sm:w-[10.5rem] lg:w-[19rem]"
             />
             <div
-              className="absolute inset-x-8 -bottom-6 h-10 rounded-[50%] bg-brand-600/35 blur-2xl"
+              className="absolute inset-x-5 -bottom-4 h-6 rounded-[50%] bg-brand-600/35 blur-xl sm:inset-x-8 sm:-bottom-6 sm:h-10 sm:blur-2xl"
               style={{ transform: "translateZ(-60px)" }}
             />
           </motion.div>
         </motion.div>
       </motion.div>
 
-      {/* kaydırma göstergesi */}
+      {/* Kaydırma göstergesi. Mobilde bölüm zaten ekrandan uzun; gösterge ilk
+          bakışta görünmediği gibi logonun üstüne de biniyordu. */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute inset-x-0 bottom-6 flex justify-center"
+        className="absolute inset-x-0 bottom-6 hidden justify-center lg:flex"
       >
         <div className="flex h-9 w-5 items-start justify-center rounded-full border border-line p-1">
           <motion.span

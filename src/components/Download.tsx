@@ -15,14 +15,14 @@ const gereksinimler = [
 
 export function Download() {
   return (
-    <section id="indir" className="relative px-5 py-24 sm:px-8 sm:py-32">
+    <section id="indir" className="relative px-4 py-20 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 44, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-brand-500/25 bg-gradient-to-b from-brand-900/45 to-ink-2/80 p-8 backdrop-blur-xl sm:p-12"
+          className="relative overflow-hidden rounded-3xl border border-brand-500/25 bg-gradient-to-b from-brand-900/45 to-ink-2/80 p-6 backdrop-blur-xl sm:p-12"
         >
           {/* arka plan efektleri */}
           <div className="pointer-events-none absolute -top-32 left-1/2 size-[34rem] -translate-x-1/2 rounded-full bg-brand-500/18 blur-[110px]" />
@@ -40,21 +40,21 @@ export function Download() {
 
           <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto]">
             <div>
-              <h2 className="font-display text-3xl leading-tight font-semibold tracking-tight text-white sm:text-4xl">
+              <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
                 Bir Sonraki Montajda Deneyin.
               </h2>
-              <p className="mt-4 max-w-lg text-slate-300/90">
+              <p className="mt-4 max-w-lg text-[0.95rem] text-slate-300/90 sm:text-base">
                 İndirin, çift tıklayın. Kurulum yok, kayıt defterine yazmıyor, internet
                 bağlantısı istemiyor. 3DEXPERIENCE açıksa saniyeler içinde listeyi
                 görürsünüz.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
                   href={site.downloads.portable}
-                  className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-7 py-4 font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50"
+                  className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-4 font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50 sm:px-7"
                 >
-                  <span className="relative z-10 flex items-center gap-2.5">
+                  <span className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-y-0.5">
                       <path d="M12 3v13M6 11l6 6 6-6M4 21h16" />
                     </svg>
@@ -70,7 +70,7 @@ export function Download() {
                   href={site.downloads.latest}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl border border-line bg-white/[0.04] px-6 py-4 font-medium text-slate-200 transition-all hover:border-brand-400/45 hover:bg-white/[0.08] hover:text-white"
+                  className="rounded-xl border border-line bg-white/[0.04] px-6 py-4 text-center font-medium text-slate-200 transition-all hover:border-brand-400/45 hover:bg-white/[0.08] hover:text-white"
                 >
                   Tüm sürümler
                 </a>
@@ -104,7 +104,7 @@ export function Download() {
           </div>
 
           {/* gereksinimler */}
-          <dl className="relative mt-12 grid gap-x-8 gap-y-5 border-t border-brand-500/15 pt-8 sm:grid-cols-2 lg:grid-cols-5">
+          <dl className="relative mt-10 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-brand-500/15 pt-7 sm:mt-12 sm:gap-x-8 sm:pt-8 lg:grid-cols-5">
             {gereksinimler.map((g, i) => (
               <motion.div
                 key={g.k}
