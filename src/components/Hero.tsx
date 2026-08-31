@@ -11,8 +11,7 @@ import {
   useTransform,
   type Variants,
 } from "motion/react";
-import { site } from "@/lib/site";
-import { virustotal } from "@/lib/virustotal";
+import type { SurumBilgisi } from "@/lib/github";
 
 const line: Variants = {
   hidden: { opacity: 0, y: 34, filter: "blur(10px)" },
@@ -24,15 +23,16 @@ const line: Variants = {
   }),
 };
 
-const stats = [
-  { k: "Sürüm", v: site.version },
-  { k: "Platform", v: "Windows x64" },
-  { k: "Kurulum", v: "Gerekmez" },
-  { k: "Dağıtım", v: "Tek dosya" },
-];
-
-export function Hero() {
+export function Hero({ surum }: { surum: SurumBilgisi }) {
   const ref = useRef<HTMLDivElement>(null);
+  const vt = surum.virustotal;
+
+  const stats = [
+    { k: "Sürüm", v: surum.surum },
+    { k: "Platform", v: "Windows x64" },
+    { k: "Kurulum", v: "Gerekmez" },
+    { k: "Dağıtım", v: "Tek dosya" },
+  ];
 
   // Fare konumuna göre logoyu eğ; yay ile yumuşat ki takip ederken sıçramasın.
   const mx = useMotionValue(0);
@@ -124,7 +124,7 @@ export function Hero() {
           </motion.div>
 
           {/* tarama rozeti — ayrıntısı Güvenlik bölümünde */}
-          {virustotal && (
+          {vt && (
             <motion.a
               href="#guvenlik"
               custom={5}
@@ -140,7 +140,7 @@ export function Hero() {
               </span>
               <span className="text-slate-300">VirusTotal</span>
               <span className="font-mono text-accent">
-                {virustotal.tespit}/{virustotal.toplam}
+                {vt.tespit}/{vt.toplam}
               </span>
               <span className="text-slate-500">güvenli</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-slate-600 transition-transform group-hover:translate-x-0.5">

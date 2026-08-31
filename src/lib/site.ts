@@ -1,6 +1,9 @@
-// Tek yerden yönetilen site sabitleri. Yeni sürüm çıktığında yalnızca burayı
-// güncellemek yeterli: başlıktaki rozet, indirme butonları ve sürüm notu bağı
-// hepsi bu değerleri kullanır.
+// Tek yerden yönetilen site sabitleri.
+//
+// Sürüm ve indirme bağlantıları artık GitHub Releases API'sinden okunuyor
+// (bkz. src/lib/github.ts). Buradaki `version` ve `downloads` yalnızca API'ye
+// ulaşılamadığında devreye giren yedek değerler — yine de ara sıra güncel
+// tutmakta fayda var ki API çöktüğünde site çok eski bir sürüm göstermesin.
 export const site = {
   name: "Macria",
   tagline: "CATIA işlerini kolaylaştıran araç seti",

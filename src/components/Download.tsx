@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { site } from "@/lib/site";
-import { Reveal } from "./Reveal";
+import type { SurumBilgisi } from "@/lib/github";
 
 const gereksinimler = [
   { k: "İşletim sistemi", v: "Windows 10 / 11 · x64" },
@@ -13,7 +12,7 @@ const gereksinimler = [
   { k: "İnternet", v: "Gerekmez, çevrimdışı çalışır." },
 ];
 
-export function Download() {
+export function Download({ surum }: { surum: SurumBilgisi }) {
   return (
     <section id="indir" className="relative px-4 py-20 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-6xl">
@@ -50,7 +49,7 @@ export function Download() {
 
               <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
-                  href={site.downloads.portable}
+                  href={surum.indirmeUrl}
                   className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-4 font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50 sm:px-7"
                 >
                   <span className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
@@ -59,14 +58,14 @@ export function Download() {
                     </svg>
                     Macria.exe indir
                     <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
-                      v{site.version}
+                      v{surum.surum}
                     </span>
                   </span>
                   <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-white/30 opacity-0 transition-opacity group-hover:animate-shimmer group-hover:opacity-100" />
                 </a>
 
                 <a
-                  href={site.downloads.latest}
+                  href={surum.tumSurumlerUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-xl border border-line bg-white/[0.04] px-6 py-4 text-center font-medium text-slate-200 transition-all hover:border-brand-400/45 hover:bg-white/[0.08] hover:text-white"

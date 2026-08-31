@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { nav, site } from "@/lib/site";
+import type { SurumBilgisi } from "@/lib/github";
 
-export function Footer() {
+export function Footer({ surum }: { surum: SurumBilgisi }) {
   return (
     <footer className="relative border-t border-line/70 px-4 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-12">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
@@ -42,7 +43,7 @@ export function Footer() {
 
       <div className="mx-auto mt-10 flex max-w-6xl flex-col gap-2 border-t border-line/50 pt-6 text-xs text-slate-600 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          © {new Date().getFullYear()} {site.name} · Sürüm {site.version}
+          © {new Date().getFullYear()} {site.name} · Sürüm {surum.surum}
         </p>
         <p>
           CATIA ve 3DEXPERIENCE, Dassault Systèmes&apos;in tescilli markalarıdır.
