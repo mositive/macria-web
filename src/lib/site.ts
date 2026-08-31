@@ -21,4 +21,24 @@ export const nav = [
   { href: "#maliyet", label: "Maliyet" },
   { href: "#indir", label: "İndir" },
   { href: "#guvenlik", label: "Güvenlik" },
+  { href: "#destek", label: "Destek ol" },
 ] as const;
+
+// Gönüllü destek kanalları.
+//
+// Bilerek "bağış" değil "destek" deniyor: 2860 sayılı Yardım Toplama Kanunu
+// gerçek kişilerin izinsiz bağış toplamasını yasaklıyor. Kullanıcı burada bir
+// bağış yapmıyor, bir destek paketi satın alıyor — para aynı, zemin farklı.
+//
+// Tek kanal: Shopier. Tahsilatı Shopier yaptığı için banka bilgisi sitede hiç
+// görünmez. `url` boş bırakılırsa destek bölümü tamamen gizlenir.
+export const support = {
+  shopier: {
+    // Shopier satıcı başvurusu onaylanınca true yap: buton o an tıklanabilir
+    // hale gelir. false iken gri ve devre dışı görünür.
+    aktif: false,
+    // TODO: Shopier'de "Macria Destek" adında bir ürün oluşturup ürünün
+    // paylaşım bağlantısını buraya yapıştır. Aşağıdaki adres yer tutucu.
+    url: "https://www.shopier.com/macria",
+  },
+} as const;

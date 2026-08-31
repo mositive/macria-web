@@ -43,7 +43,8 @@ export function Nav() {
             </span>
           </a>
 
-          <div className="hidden items-center gap-1 md:flex">
+          {/* 7 bağlantı md genişliğine sığmıyordu; masaüstü menüsü lg'den açılır. */}
+          <div className="hidden items-center gap-1 lg:flex">
             {nav.map((item) => (
               <a
                 key={item.href}
@@ -78,7 +79,7 @@ export function Nav() {
               aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={open}
               aria-controls="mobil-menu"
-              className="flex size-11 items-center justify-center rounded-lg border border-line text-slate-300 md:hidden"
+              className="flex size-11 items-center justify-center rounded-lg border border-line text-slate-300 lg:hidden"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M3 7h18M3 12h18M3 17h18" />}
@@ -95,7 +96,7 @@ export function Nav() {
           initial={false}
           animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="overflow-hidden border-t border-line/60 bg-ink/95 backdrop-blur-xl md:hidden"
+          className="overflow-hidden border-t border-line/60 bg-ink/95 backdrop-blur-xl lg:hidden"
         >
           <div className="flex max-h-[calc(100svh-4rem)] flex-col overflow-y-auto px-4 py-2 pb-4">
             {nav.map((item) => (

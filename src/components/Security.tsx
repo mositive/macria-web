@@ -184,7 +184,7 @@ function VirusTotalPaneli() {
 export function Security() {
   return (
     <section id="guvenlik" className="relative px-4 py-20 sm:px-8 sm:py-32">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <Reveal className="max-w-2xl">
           <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-5xl">
             İndirdiğiniz Dosyanın Ne Olduğunu Bilin.
@@ -193,8 +193,8 @@ export function Security() {
             Kurumsal bir makineye indirdiğiniz imzasız bir exe&apos;ye körü körüne
             güvenmenizi beklemiyoruz.{" "}
             {virustotal
-              ? "Yayınlanan dosya VirusTotal'de taranıyor, sonuç aşağıda."
-              : "Yayınlanan dosyanın parmak izi aşağıda — indirdiğinizle karşılaştırın."}
+              ? "Yayınlanan Macria sürümleri VirusTotal tarafından taranır ve raporlanır."
+              : "Yayınlanan dosyanın parmak izini kullanarak kendi indirdiğiniz dosyanın bütünlüğünü doğrulayabilirsiniz."}
           </p>
         </Reveal>
 

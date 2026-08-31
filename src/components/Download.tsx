@@ -8,15 +8,15 @@ import { Reveal } from "./Reveal";
 const gereksinimler = [
   { k: "İşletim sistemi", v: "Windows 10 / 11 · x64" },
   { k: "CAD", v: "3DEXPERIENCE · CATIA V6" },
-  { k: "Çalışma zamanı", v: ".NET 8 (exe içinde gömülü)" },
-  { k: "Kurulum", v: "Yok — taşınabilir tek dosya" },
-  { k: "İnternet", v: "Gerekmez — çevrimdışı çalışır" },
+  { k: "Çalışma zamanı", v: ".NET 8" },
+  { k: "Kurulum", v: "Gerekmez, taşınabilir tek dosya." },
+  { k: "İnternet", v: "Gerekmez, çevrimdışı çalışır." },
 ];
 
 export function Download() {
   return (
     <section id="indir" className="relative px-4 py-20 sm:px-8 sm:py-32">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 44, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -41,12 +41,11 @@ export function Download() {
           <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto]">
             <div>
               <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
-                Bir Sonraki Montajda Deneyin.
+                Bir Sonraki Montajda Kullanın.
               </h2>
               <p className="mt-4 max-w-lg text-[0.95rem] text-slate-300/90 sm:text-base">
-                İndirin, çift tıklayın. Kurulum yok, kayıt defterine yazmıyor, internet
-                bağlantısı istemiyor. 3DEXPERIENCE açıksa saniyeler içinde listeyi
-                görürsünüz.
+                İndirin, çift tıklayın. Kurulum yok, internet
+                bağlantısı ihtiyacı yok.
               </p>
 
               <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">

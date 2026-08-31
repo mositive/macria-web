@@ -7,6 +7,7 @@ import { ExportDemo } from "@/components/ExportDemo";
 import { CostDemo } from "@/components/CostDemo";
 import { Download } from "@/components/Download";
 import { Security } from "@/components/Security";
+import { Support } from "@/components/Support";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
         <CostDemo />
         <Download />
         <Security />
+        <Support />
       </main>
       <Footer />
     </>
