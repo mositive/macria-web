@@ -35,7 +35,26 @@ type GitHubVarlik = {
 type GitHubYayin = {
   tag_name?: string;
   html_url?: string;
+  name?: string;
+  body?: string | null;
+  published_at?: string | null;
+  draft?: boolean;
+  prerelease?: boolean;
   assets?: GitHubVarlik[];
+};
+
+/** Sürüm notlarının işlenmiş hali; istemciye düz veri olarak gider. */
+export type SurumNotu =
+  | { tur: "baslik"; metin: string }
+  | { tur: "liste"; ogeler: string[] }
+  | { tur: "paragraf"; metin: string };
+
+export type SurumKaydi = {
+  surum: string;
+  tarih: string | null;
+  onSurum: boolean;
+  url: string;
+  notlar: SurumNotu[];
 };
 
 // VirusTotal rapor adresi dosyanın özetini içerir. Tutmuyorsa rapor başka bir
@@ -54,18 +73,22 @@ const yedek: SurumBilgisi = {
   virustotal: raporEslesiyor(release.sha256) ? virustotal : null,
 };
 
+function depoYolu() {
+  return new URL(site.github).pathname.replace(/^\/+|\/+$/g, "");
+}
+
+function apiIste(yol: string) {
+  return fetch(`https://api.github.com/repos/${depoYolu()}${yol}`, {
+    headers: { Accept: "application/vnd.github+json" },
+    // Saatte bir tazele. Kimliksiz GitHub API sınırı IP başına 60 istek/saat,
+    // bu aralıkta sınıra yaklaşmak mümkün değil.
+    next: { revalidate: 3600 },
+  });
+}
+
 export async function surumBilgisiniAl(): Promise<SurumBilgisi> {
   try {
-    const repo = new URL(site.github).pathname.replace(/^\/+|\/+$/g, "");
-    const yanit = await fetch(
-      `https://api.github.com/repos/${repo}/releases/latest`,
-      {
-        headers: { Accept: "application/vnd.github+json" },
-        // Saatte bir tazele. Kimliksiz GitHub API sınırı IP başına 60 istek/saat,
-        // bu aralıkta sınıra yaklaşmak mümkün değil.
-        next: { revalidate: 3600 },
-      },
-    );
+    const yanit = await apiIste("/releases/latest");
     if (!yanit.ok) return yedek;
 
     const yayin: GitHubYayin = await yanit.json();
@@ -92,5 +115,98 @@ export async function surumBilgisiniAl(): Promise<SurumBilgisi> {
     };
   } catch {
     return yedek;
+  }
+}
+
+// GitHub sürüm notları Markdown. Tam bir Markdown çözümleyicisi getirmek yerine
+// notlarda fiilen kullanılan üç yapıyı ayırıyoruz: başlık, madde listesi ve
+// paragraf. Satır içi kalın/eğik işaretleri ve bağlantılar düz metne indirilir,
+// böylece istemciye HTML değil veri gider.
+function satirIciSadelestir(metin: string) {
+  return metin
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "") // görseller
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // bağlantılar → metni
+    .replace(/(\*\*|__)(.*?)\1/g, "$2") // kalın
+    .replace(/(\*|_)(?=\S)(.*?)(?<=\S)\1/g, "$2") // eğik
+    .replace(/`([^`]*)`/g, "$1") // satır içi kod
+    .trim();
+}
+
+function notlariAyristir(govde: string | null | undefined): SurumNotu[] {
+  if (!govde) return [];
+
+  const notlar: SurumNotu[] = [];
+  let liste: string[] = [];
+
+  const listeyiKapat = () => {
+    if (liste.length) {
+      notlar.push({ tur: "liste", ogeler: liste });
+      liste = [];
+    }
+  };
+
+  for (const hamSatir of govde.replace(/\r\n/g, "\n").split("\n")) {
+    const satir = hamSatir.trim();
+
+    if (!satir) {
+      listeyiKapat();
+      continue;
+    }
+
+    const baslik = satir.match(/^#{1,6}\s+(.*)$/);
+    if (baslik) {
+      listeyiKapat();
+      const metin = satirIciSadelestir(baslik[1]);
+      if (metin) notlar.push({ tur: "baslik", metin });
+      continue;
+    }
+
+    const madde = satir.match(/^[-*+]\s+(.*)$/);
+    if (madde) {
+      const metin = satirIciSadelestir(madde[1]);
+      if (metin) liste.push(metin);
+      continue;
+    }
+
+    listeyiKapat();
+    const metin = satirIciSadelestir(satir);
+    if (metin) notlar.push({ tur: "paragraf", metin });
+  }
+
+  listeyiKapat();
+  return notlar;
+}
+
+/**
+ * Yayınlanmış bütün sürümleri yeniden eskiye doğru döndürür. İstek başarısız
+ * olursa boş dizi döner ve sürüm geçmişi bölümü sayfada hiç görünmez.
+ */
+export async function surumGecmisiniAl(): Promise<SurumKaydi[]> {
+  try {
+    const yanit = await apiIste("/releases?per_page=50");
+    if (!yanit.ok) return [];
+
+    const yayinlar: GitHubYayin[] = await yanit.json();
+    if (!Array.isArray(yayinlar)) return [];
+
+    return yayinlar
+      .filter((y) => !y.draft && y.tag_name)
+      .map((y) => ({
+        surum: (y.tag_name as string).replace(/^v/i, ""),
+        // Tarihi sunucuda biçimlendiriyoruz; istemcide biçimlendirmek
+        // sunucu çıktısıyla uyuşmayıp hidrasyon uyarısı üretebiliyor.
+        tarih: y.published_at
+          ? new Date(y.published_at).toLocaleDateString("tr-TR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })
+          : null,
+        onSurum: Boolean(y.prerelease),
+        url: y.html_url ?? site.downloads.latest,
+        notlar: notlariAyristir(y.body),
+      }));
+  } catch {
+    return [];
   }
 }

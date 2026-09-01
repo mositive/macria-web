@@ -104,7 +104,7 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
             className="mt-8 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center"
           >
             <a
-              href="#indir"
+              href="/indir"
               className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-3.5 text-center font-medium text-white shadow-xl shadow-brand-600/30 transition-all hover:shadow-2xl hover:shadow-brand-500/45"
             >
               <span className="relative z-10 flex items-center justify-center gap-2.5">
@@ -126,7 +126,7 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
           {/* tarama rozeti — ayrıntısı Güvenlik bölümünde */}
           {vt && (
             <motion.a
-              href="#guvenlik"
+              href="/indir#guvenlik"
               custom={5}
               variants={line}
               initial="hidden"

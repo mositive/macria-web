@@ -17,14 +17,14 @@ export const site = {
   },
 } as const;
 
+// Menü hem başlıkta hem altbilgide kullanılıyor. Çapalar ana sayfadaki
+// bölümlere ait olduğu için "/#..." biçiminde: /indir sayfasından tıklanınca
+// da doğru yere gider.
 export const nav = [
-  { href: "#ozellikler", label: "Araç seti" },
-  { href: "#akis", label: "Nasıl çalışır" },
-  { href: "#dxf", label: "Toplu DXF" },
-  { href: "#maliyet", label: "Maliyet" },
-  { href: "#indir", label: "İndir" },
-  { href: "#guvenlik", label: "Güvenlik" },
-  { href: "#destek", label: "Destek ol" },
+  { href: "/#ozellikler", label: "Araç seti" },
+  { href: "/#akis", label: "Nasıl çalışır" },
+  { href: "/indir", label: "İndir" },
+  { href: "/destek", label: "Destek" },
 ] as const;
 
 // Gönüllü destek kanalları.
@@ -37,11 +37,11 @@ export const nav = [
 // görünmez. `url` boş bırakılırsa destek bölümü tamamen gizlenir.
 export const support = {
   shopier: {
-    // Shopier satıcı başvurusu onaylanınca true yap: buton o an tıklanabilir
-    // hale gelir. false iken gri ve devre dışı görünür.
-    aktif: false,
-    // TODO: Shopier'de "Macria Destek" adında bir ürün oluşturup ürünün
-    // paylaşım bağlantısını buraya yapıştır. Aşağıdaki adres yer tutucu.
-    url: "https://www.shopier.com/macria",
+    // false yapılırsa buton griye döner ve tıklanamaz olur — ürünü yayından
+    // kaldırdığın ya da hesapta bir sorun çıktığı zaman işe yarar.
+    aktif: true,
+    // "Macria Destek" ürünü. Birim fiyat ₺200; destekçi tutarı ödeme
+    // ekranındaki adet seçiciyle artırıyor.
+    url: "https://www.shopier.com/macria/50456694",
   },
 } as const;

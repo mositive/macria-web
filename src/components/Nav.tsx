@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { nav, site } from "@/lib/site";
@@ -27,7 +28,7 @@ export function Nav() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-3.5">
-          <a href="#" className="group flex shrink-0 items-center gap-2.5">
+          <Link href="/" className="group flex shrink-0 items-center gap-2.5">
             <span className="relative flex size-8 items-center justify-center sm:size-9">
               <span className="absolute inset-0 rounded-xl bg-brand-500/25 blur-md transition-all group-hover:bg-brand-400/45" />
               <Image
@@ -41,19 +42,18 @@ export function Nav() {
             <span className="font-display text-base font-semibold tracking-tight text-white sm:text-lg">
               {site.name}
             </span>
-          </a>
+          </Link>
 
-          {/* 7 bağlantı md genişliğine sığmıyordu; masaüstü menüsü lg'den açılır. */}
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-1 md:flex">
             {nav.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="relative rounded-lg px-3.5 py-2 text-sm text-slate-300 transition-colors hover:text-white"
               >
                 <span className="relative z-10">{item.label}</span>
                 <span className="absolute inset-0 scale-90 rounded-lg bg-white/5 opacity-0 transition-all duration-200 hover:scale-100 hover:opacity-100" />
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -66,20 +66,20 @@ export function Nav() {
             >
               GitHub
             </a>
-            <a
-              href="#indir"
+            <Link
+              href="/indir"
               className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-brand-600 to-brand-400 px-3.5 py-2.5 text-sm font-medium text-white shadow-lg shadow-brand-600/25 transition-shadow hover:shadow-brand-500/40 sm:px-4 sm:py-2"
             >
               <span className="relative z-10">İndir</span>
               <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-white/25 opacity-0 transition-opacity group-hover:animate-shimmer group-hover:opacity-100" />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={open}
               aria-controls="mobil-menu"
-              className="flex size-11 items-center justify-center rounded-lg border border-line text-slate-300 lg:hidden"
+              className="flex size-11 items-center justify-center rounded-lg border border-line text-slate-300 md:hidden"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M3 7h18M3 12h18M3 17h18" />}
@@ -96,18 +96,18 @@ export function Nav() {
           initial={false}
           animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="overflow-hidden border-t border-line/60 bg-ink/95 backdrop-blur-xl lg:hidden"
+          className="overflow-hidden border-t border-line/60 bg-ink/95 backdrop-blur-xl md:hidden"
         >
           <div className="flex max-h-[calc(100svh-4rem)] flex-col overflow-y-auto px-4 py-2 pb-4">
             {nav.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-2 py-3.5 text-[0.95rem] text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <a
               href={site.github}

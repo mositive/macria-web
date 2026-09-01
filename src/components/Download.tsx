@@ -74,18 +74,34 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
                 </a>
               </div>
 
-              <a
-                href="#guvenlik"
-                className="group mt-5 inline-flex items-center gap-2 text-xs text-slate-400 transition-colors hover:text-white"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-300">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                VirusTotal tarama raporu
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a
+                  href="#guvenlik"
+                  className="group inline-flex items-center gap-2 text-xs text-slate-400 transition-colors hover:text-white"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-300">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  VirusTotal tarama raporu
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+
+                <a
+                  href="#surumler"
+                  className="group inline-flex items-center gap-2 text-xs text-slate-400 transition-colors hover:text-white"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-300">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3.5 2" />
+                  </svg>
+                  Sürüm geçmişi
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
             {/* dönen logo */}

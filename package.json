@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "release:info": "node scripts/release-info.mjs"
+    "release:info": "node scripts/release-info.mjs",
+    "icons": "node scripts/icons.mjs"
   },
   "dependencies": {
     "motion": "^13.1.1",

@@ -30,6 +30,14 @@ export function Footer({ surum }: { surum: SurumBilgisi }) {
               {item.label}
             </a>
           ))}
+          {/* Üst menüde ayrı bir madde yok; sürüm geçmişi indirme sayfasının
+              içinde ve buradan bağlanıyor. */}
+          <a
+            href="/indir#surumler"
+            className="py-1.5 text-sm text-slate-400 transition-colors hover:text-white"
+          >
+            Sürüm geçmişi
+          </a>
           <a
             href={site.github}
             target="_blank"

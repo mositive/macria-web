@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { surumBilgisiniAl } from "@/lib/github";
+import { Backdrop } from "@/components/Backdrop";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -38,7 +42,10 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     siteName: site.name,
   },
-  icons: { icon: "/macria-logo.png", apple: "/macria-logo.png" },
+  // İkonlar dosya kuralıyla veriliyor: src/app/favicon.ico ve
+  // src/app/apple-icon.png. Burada ayrıca tanımlamak ikinci bir <link>
+  // basıp hangisinin kullanılacağını tarayıcının insafına bırakıyordu.
+  // İkisi de "npm run icons" ile logodan üretilir.
 };
 
 export const viewport: Viewport = {
@@ -47,12 +54,21 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({
+// Arka plan, başlık ve altbilgi her sayfada aynı; düzende duruyorlar ki
+// sayfalar arası geçişte yeniden kurulmasınlar.
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const surum = await surumBilgisiniAl();
+
   return (
     <html lang="tr" className={`${sora.variable} ${inter.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Backdrop />
+        <Nav />
+        {children}
+        <Footer surum={surum} />
+      </body>
     </html>
   );
 }
