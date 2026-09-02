@@ -18,12 +18,12 @@ export type VirusTotalRaporu = {
   tarandi: string;
 };
 
-// v1.7.0 (yeniden derlenmiş sürüm) taraması. Buradaki hash release.ts'teki
-// sha256 ile birebir aynı olmalı — aksi halde site, indirilen dosyadan başka
-// bir dosyanın raporunu göstermiş olur.
+// v1.8.0 taraması. Buradaki hash release.ts'teki sha256 ile birebir aynı
+// olmalı — aksi halde site, indirilen dosyadan başka bir dosyanın raporunu
+// göstermiş olur.
 export const virustotal: VirusTotalRaporu | null = {
-  url: "https://www.virustotal.com/gui/file/86857f128f7d43ad0e6286806f66e80dec225a5cb2499b73595d36061ccb586a",
+  url: "https://www.virustotal.com/gui/file/78d150d218e855cac4062726451e7b84caf9565dbcea9944433b750edb720885",
   tespit: 0,
-  toplam: 68,
-  tarandi: "2026-08-29",
+  toplam: 69,
+  tarandi: "2026-09-02",
 };
