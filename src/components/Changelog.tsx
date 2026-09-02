@@ -77,8 +77,7 @@ export function Changelog({ gecmis }: { gecmis: SurumKaydi[] }) {
             Her Sürümde Ne Değişti?
           </h2>
           <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-base">
-            Notlar GitHub&apos;daki yayınlardan geliyor; yeni bir sürüm
-            çıktığında bu liste kendiliğinden güncelleniyor.
+            Yeni gelen sürümlerle birlikte Macria&apos;ya eklenen özellikler, yapılan değişiklikler ve düzeltmelerin detaylarını aşağıda bulabilirsiniz. Her sürümün notları, kullanıcıların güncellemelerden haberdar olmasını ve yeni özellikleri keşfetmesini kolaylaştırır.
           </p>
         </Reveal>
 
