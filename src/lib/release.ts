@@ -4,6 +4,6 @@
 
 export const release = {
   dosya: "Macria.exe",
-  boyutBayt: 163179548,
-  sha256: "86857f128f7d43ad0e6286806f66e80dec225a5cb2499b73595d36061ccb586a",
+  boyutBayt: 163281948,
+  sha256: "78d150d218e855cac4062726451e7b84caf9565dbcea9944433b750edb720885",
 } as const;

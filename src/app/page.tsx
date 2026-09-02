@@ -3,6 +3,7 @@ import { Pipeline } from "@/components/Pipeline";
 import { Features } from "@/components/Features";
 import { ExportDemo } from "@/components/ExportDemo";
 import { CostDemo } from "@/components/CostDemo";
+import { Developers } from "@/components/Developers";
 import { DownloadCta } from "@/components/DownloadCta";
 import { surumBilgisiniAl } from "@/lib/github";
 
@@ -18,6 +19,7 @@ export default async function Home() {
       <ExportDemo />
       <Features />
       <CostDemo />
+      <Developers />
       <DownloadCta surum={surum} />
     </main>
   );

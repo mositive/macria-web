@@ -1,20 +1,23 @@
 import { support } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
-function KartIkonu() {
+// Shopier'e yeni sekmede gidildiğini anlatan dış bağlantı ikonu.
+function DisBaglantiIkonu() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
-      <rect x="2" y="5" width="20" height="14" rx="2.5" />
-      <path d="M2 10h20" />
+      <path d="M14 4h6v6" />
+      <path d="M20 4 10.5 13.5" />
+      <path d="M19 14.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 3 19V6a1.5 1.5 0 0 1 1.5-1.5H9" />
     </svg>
   );
 }
@@ -64,8 +67,8 @@ export function Support() {
                     className="group relative block overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-4 text-center font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50 sm:px-7"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2.5">
-                      <KartIkonu />
                       Destek ol
+                      <DisBaglantiIkonu />
                     </span>
                     <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-white/30 opacity-0 transition-opacity group-hover:animate-shimmer group-hover:opacity-100" />
                   </a>
@@ -77,8 +80,8 @@ export function Support() {
                     className="cursor-not-allowed rounded-xl border border-line bg-white/[0.04] px-6 py-4 text-center font-medium text-slate-500 select-none sm:px-7"
                   >
                     <span className="flex items-center justify-center gap-2.5">
-                      <KartIkonu />
                       Destek ol
+                      <DisBaglantiIkonu />
                     </span>
                   </div>
                 )}
