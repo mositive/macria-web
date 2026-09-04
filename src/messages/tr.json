@@ -1,0 +1,228 @@
+{
+  "dil": {
+    "ad": "Türkçe",
+    "kisa": "TR",
+    "digerineGec": "Switch to English",
+    "etiket": "Dil"
+  },
+  "meta": {
+    "anaSayfa": {
+      "baslik": "CATIA işlerini kolaylaştıran araç seti",
+      "aciklama": "3DEXPERIENCE (CATIA V6) üzerinde tekrar eden işleri devralan masaüstü araç seti. Sac parça listesi, toplu DXF aktarımı, ağırlık ve maliyet hesabı tek pencerede.",
+      "ogAciklama": "Tekrar eden CATIA işlerini tek pencerede toplayan masaüstü araç seti."
+    },
+    "indir": {
+      "baslik": "İndir",
+      "aciklama": "Macria'yı indirin: kurulum gerektirmeyen tek dosya, dosya doğrulama bilgileri ve bütün sürümlerin değişiklik notları."
+    },
+    "destek": {
+      "baslik": "Destek ol",
+      "aciklama": "Macria ücretsiz ve açık kaynaklı. Geliştirilmesine gönüllü katkı sağlamak isteyenler için destek seçeneği."
+    }
+  },
+  "nav": {
+    "araclar": "Araç seti",
+    "nasilCalisir": "Nasıl çalışır",
+    "indir": "İndir",
+    "destek": "Destek",
+    "menuAc": "Menüyü aç",
+    "menuKapat": "Menüyü kapat"
+  },
+  "hero": {
+    "baslikUst": "Tekrar eden işler",
+    "baslikAlt": "tek pencerede, tek tuşla.",
+    "aciklama": "Macria, 3DEXPERIENCE'taki açık montajınıza bağlanır ve tekrarlı işleri sizin yerinize yapar. Kurulum gerekmez, çevrimdışı çalışır.",
+    "indirTusu": "Windows için indir",
+    "nasilTusu": "Nasıl çalışır?",
+    "virustotal": "VirusTotal ile Tarandı:",
+    "virustotalSonuc": "Güvenli Yazılım",
+    "kapilar": [
+      { "baslik": "Toplu DXF aktarımı", "metin": "Yüz parçalık montajda tek tuş." },
+      { "baslik": "Sac parça listesi", "metin": "Kalınlık ve adet tek ekranda." },
+      { "baslik": "Ağırlık ve maliyet", "metin": "Açınımdan doğrudan hesap." }
+    ]
+  },
+  "pipeline": {
+    "baslik": "Dört Adım, Tek Pencere.",
+    "aciklama": "Hangi aracı kullanırsanız kullanın akış aynı — ve araç seti büyüdükçe de aynı kalacak. Uygulamayı açın, montaj zaten 3DEXPERIENCE'ta açıksa gerisi kendiliğinden gelir.",
+    "adimlar": [
+      {
+        "baslik": "Bağlanır",
+        "metin": "Açık olan 3DEXPERIENCE (CATIA V6) oturumuna COM üzerinden bağlanır. ProgID bulunamayan kurumsal makinelerde CLSID ve ROT taramasına düşer."
+      },
+      {
+        "baslik": "Ağacı tarar",
+        "metin": "Aktif montajın ürün ağacını baştan sona gezer, sac (sheet metal) parçaları ayıklar ve tekrar edenleri adet olarak toplar."
+      },
+      {
+        "baslik": "Tabloya döker",
+        "metin": "Ürün adı, parça adı, kalınlık ve adet tek tabloda. Sütunları siz seçersiniz, kendi formül sütunlarınızı eklersiniz."
+      },
+      {
+        "baslik": "İşi devralır",
+        "metin": "Seçtiğiniz aracı çalıştırır: DXF aktarımında panelleri sizin yerinize sürer, maliyet aracında tabloyu hesaplar. Üstte duran ilerleme penceresi ve acil durdurma hep elinizin altında."
+      }
+    ]
+  },
+  "features": {
+    "baslik": "Bir Uygulama, Büyüyen Bir Araç Seti.",
+    "aciklama": "Her iş için ayrı makro dosyası aramak yerine hepsi tek pencerede. Aşağıdakiler bugün hazır — liste her sürümde uzuyor.",
+    "kartlar": [
+      {
+        "baslik": "Toplu DXF aktarımı",
+        "metin": "Listedeki bütün sac parçaları tek tuşla dışa aktarın. Üstte duran ilerleme penceresi nerede kalındığını gösterir, acil durdurma her an elinizin altındadır."
+      },
+      {
+        "baslik": "Montaj ağacı taraması",
+        "metin": "Aktif montajın ağacını baştan sona gezip aradığınız parçaları toplar; tekrar edenleri adet olarak birleştirir. Diğer araçların hepsi bu listenin üstünde çalışır."
+      },
+      {
+        "baslik": "Ağırlık ve maliyet",
+        "metin": "Kalınlık, açınım alanı ve malzeme yoğunluğundan ağırlık; birim fiyattan maliyet. DKP, galvaniz, Hardox, paslanmaz ve alüminyum hazır gelir."
+      },
+      {
+        "baslik": "DXF önizleme",
+        "metin": "Aktarılan dosyayı açmadan önce içindeki açınımı görün. Boş çıkmış mı, beklediğiniz şekil mi — göz kararıyla saniyede anlaşılır."
+      },
+      {
+        "baslik": "Formül sütunları",
+        "metin": "Tabloya kendi sütununuzu ekleyin, diğer sütunlarla hesap kurun. min, max, kök, yuvarla gibi fonksiyonlar Türkçe ve İngilizce adlarıyla çalışır."
+      },
+      {
+        "baslik": "Isı haritalı tablo",
+        "metin": "Sayı hücrelerinin arkası kendi sütunu içinde tonlanır; en pahalı, en ağır, en kalın parça listeye bakar bakmaz göze çarpar."
+      },
+      {
+        "baslik": "Grafik ve rapor",
+        "metin": "Dağılımı grafikte görün, sonucu Excel ya da PDF olarak dışarı verin. Grafikler dış kütüphane olmadan uygulamanın içinde çizilir."
+      },
+      {
+        "baslik": "Kurulum ve internet yok",
+        "metin": "Tek dosya, taşınabilir exe. Yönetici hakkı istemez, internet bağlantısı aramaz — dışarı kapalı bir ağdaki makinede USB'den bile çalışır."
+      }
+    ],
+    "oneri": {
+      "baslik": "Sırada ne olsun?",
+      "metin": "Her gün elle yaptığınız bir iş varsa yazın — araç setine bir sonraki eklenecek şey o olsun.",
+      "tus": "GitHub'da öner"
+    }
+  },
+  "dxf": {
+    "baslik": "Yüz Parçalık Montajda Da Tek Tuş.",
+    "aciklama": "Parçaları tek tek açıp \"Save As DXF\" demek yerine listeyi seçip başlatın. Macria panelleri sizin yerinize sürer; her adımda hangi parçada olduğunuzu gösteren küçük pencere bütün uygulamaların üstünde kalır.",
+    "maddeler": [
+      "Seçili parça ya da listenin tamamı",
+      "Üstte duran ilerleme penceresi (PiP)",
+      "Tek tuşla acil durdurma",
+      "Aktarım biter bitmez klasörü aç"
+    ],
+    "pencereBasligi": "Macria — Montaj1",
+    "sutunlar": { "parca": "Parça", "kalinlik": "Kal.", "adet": "Adet" },
+    "parcalar": [
+      "YAN-PANEL-SOL",
+      "TABAN-SACI",
+      "KAPAK-ON",
+      "BRAKET-U",
+      "ARKA-KAPAK",
+      "GUSSET-30",
+      "MENTESE-PLK"
+    ],
+    "tamamlandi": "Aktarım tamamlandı",
+    "aktariliyor": "Aktarılıyor",
+    "ilerlemeBasligi": "DXF aktarımı",
+    "durdur": "Durdur"
+  },
+  "maliyet": {
+    "baslik": "Teklif İçin Tabloyu Beklemeyin.",
+    "aciklama": "Açınım alanı, kalınlık ve malzeme yoğunluğu zaten elinizde. Macria bunları birleştirip her parçanın ağırlığını ve maliyetini listeyle birlikte verir. Malzemeyi değiştirin, bütün tablo anında yeniden hesaplansın.",
+    "toplamAgirlik": "Toplam ağırlık",
+    "toplamMaliyet": "Toplam maliyet",
+    "not": "Yoğunluklar uygulamada hazır gelir; listede olmayan bir alaşımı kendiniz ekleyebilirsiniz. Birim fiyat sizindir — buradaki değerler yalnızca örnek.",
+    "tabloBasligi": "Maliyet tablosu",
+    "malzemeler": ["DKP / St37", "Paslanmaz 304", "Alüminyum 5754", "Bakır"],
+    "parcalar": ["YAN-PANEL-SOL", "TABAN-SACI", "KAPAK-ON", "BRAKET-U", "GUSSET-30"],
+    "sutunlar": {
+      "parca": "Parça",
+      "kalinlik": "Kal.",
+      "alan": "Alan m²",
+      "agirlik": "Ağırlık",
+      "maliyet": "Maliyet",
+      "toplam": "Toplam"
+    }
+  },
+  "gelistiriciler": {
+    "etiket": "Geliştiriciler",
+    "baslik": "Macria'yı Yazan Ekip.",
+    "aciklama": "Macria, sahada CATIA kullanan mühendisler tarafından geliştiriliyor. Sorularınız ve iş birliği önerileriniz için LinkedIn üzerinden ulaşabilirsiniz."
+  },
+  "kapanis": {
+    "baslik": "Bir Sonraki Montajda Kullanın.",
+    "aciklama": "Kurulum yok, taşınabilir tek dosya, çevrimdışı çalışır. İndirme sayfasında dosyanın doğrulama bilgileri ve sürüm geçmişi de var.",
+    "tus": "İndirme sayfasına git"
+  },
+  "indirme": {
+    "baslik": "Bir Sonraki Montajda Kullanın.",
+    "aciklama": "İndirin, çift tıklayın. Kurulum yok, internet bağlantısı ihtiyacı yok.",
+    "tus": "Macria.exe indir",
+    "tumSurumler": "Tüm sürümler",
+    "taramaRaporu": "VirusTotal tarama raporu",
+    "surumGecmisi": "Sürüm geçmişi",
+    "gereksinimler": [
+      { "baslik": "İşletim sistemi", "deger": "Windows 10 / 11 · x64" },
+      { "baslik": "CAD", "deger": "3DEXPERIENCE · CATIA V6" },
+      { "baslik": "Çalışma zamanı", "deger": ".NET 8" },
+      { "baslik": "Kurulum", "deger": "Gerekmez, taşınabilir tek dosya." },
+      { "baslik": "İnternet", "deger": "Gerekmez, çevrimdışı çalışır." }
+    ]
+  },
+  "guvenlik": {
+    "baslik": "İndirdiğiniz Dosyanın Ne Olduğunu Bilin.",
+    "aciklamaGiris": "Kurumsal bir makineye indirdiğiniz imzasız bir exe'ye körü körüne güvenmenizi beklemiyoruz.",
+    "aciklamaRaporVar": "Yayınlanan Macria sürümleri VirusTotal tarafından taranır ve raporlanır.",
+    "aciklamaRaporYok": "Yayınlanan dosyanın parmak izini kullanarak kendi indirdiğiniz dosyanın bütünlüğünü doğrulayabilirsiniz.",
+    "raporYokBaslik": "Sürüm {surum} yeni yayınlandı; tarama raporu ve dosya parmak izi henüz hazır değil. Dilerseniz indirdiğiniz dosyayı VirusTotal'e kendiniz yükleyip tarama sonucunu hemen görebilirsiniz.",
+    "vtYukle": "VirusTotal'e yükle",
+    "kaynakKodu": "Kaynak kodu incele",
+    "ozetGiris": "Bu sürümün tarama raporu henüz hazır değil. Ama beklemenize gerek yok: indirdiğiniz dosyanın",
+    "ozetVurgu": "bizim yayınladığımız dosyanın aynısı",
+    "ozetSon": "olduğunu şimdi kendiniz doğrulayabilirsiniz.",
+    "kopyala": "Kopyala",
+    "kopyalandi": "Kopyalandı",
+    "powershellNot": "İndirdiğiniz dosyanın bulunduğu klasörde PowerShell'i açıp şunu çalıştırın — çıkan özet yukarıdakiyle birebir aynı olmalı:",
+    "ozetSorgula": "Bu özeti VirusTotal'de sorgula",
+    "temiz": "Hiçbir antivirüs motoru tehdit bulmadı.",
+    "tespitVar": "{sayi} motor dosyayı işaretledi — ayrıntı için rapora bakın.",
+    "raporuAc": "Raporu aç",
+    "motorTarandi": "{sayi} motor tarandı",
+    "imzaVurgu": "Bu program henüz imzalanmamıştır.",
+    "imzaMetin": "Bu yüzden Windows SmartScreen ilk açılışta sizi uyarabilir.",
+    "imzaKomut": "Ek bilgi → Yine de çalıştır",
+    "imzaSon": "seçimini yaparak programı kullanmaya başlayabilirsiniz. Uyarı dosyanın zararlı olduğunu değil, imzasının henüz tanınmadığını belirtmektedir."
+  },
+  "surumler": {
+    "etiket": "Sürüm geçmişi",
+    "baslik": "Her Sürümde Ne Değişti?",
+    "aciklama": "Yeni gelen sürümlerle birlikte Macria'ya eklenen özellikler, yapılan değişiklikler ve düzeltmelerin detaylarını aşağıda bulabilirsiniz. Her sürümün notları, kullanıcıların güncellemelerden haberdar olmasını ve yeni özellikleri keşfetmesini kolaylaştırır.",
+    "notYok": "Bu sürüm için not yazılmamış.",
+    "guncel": "Güncel",
+    "onSurum": "Ön sürüm",
+    "githubdaAc": "GitHub'da aç",
+    "dahaGoster": "Önceki {sayi} sürümü göster",
+    "tumYayinlar": "Tüm yayınlar GitHub'da"
+  },
+  "destek": {
+    "etiket": "Destek ol",
+    "baslik": "Macria'nın Geliştirme Sürecini Destekleyin.",
+    "aciklama": "Macria tamamen ücretsiz ve açık kaynaklıdır. Destekleriniz, yeni özelliklerin eklenmesine, hataların düzeltilmesine ve genel olarak Macria'nın daha iyi bir araç haline gelmesine yardımcı olur.",
+    "bilgiEtiket": "Bilgilendirme",
+    "bilgiMetin": "Destekleriniz Shopier üzerinden güvenli bir şekilde işlenir. Ödeme bilgileri doğrudan Shopier tarafından işlenir ve Macria web sitesinde saklanmaz.",
+    "tus": "Destek ol",
+    "yakinda": "Ödeme altyapısı hazırlanıyor, çok yakında.",
+    "dipnot": "Destek tamamen gönüllüdür; ödeme yapmak size ek bir hak, öncelik ya da lisans sağlamaz."
+  },
+  "altbilgi": {
+    "surumGecmisi": "Sürüm geçmişi",
+    "surum": "Sürüm",
+    "marka": "CATIA ve 3DEXPERIENCE, Dassault Systèmes'in tescilli markalarıdır. Bu proje Dassault Systèmes ile ilişkili değildir."
+  }
+}

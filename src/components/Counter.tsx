@@ -2,17 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView, useMotionValueEvent, useSpring } from "motion/react";
+import { bicimEtiketi, varsayilanDil, type Dil } from "@/lib/i18n";
 
 /**
  * Görünür alana girince 0'dan hedefe sayan sayı. Değer sonradan değişirse
  * (örneğin malzeme seçimi) yeni değere yumuşak geçer.
+ *
+ * Ondalık ayracı dile bağlı: Türkçede 12,4 — İngilizcede 12.4.
  */
 export function Counter({
   value,
   decimals = 0,
+  dil = varsayilanDil,
 }: {
   value: number;
   decimals?: number;
+  dil?: Dil;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { margin: "-40px" });
@@ -27,7 +32,7 @@ export function Counter({
 
   return (
     <span ref={ref}>
-      {shown.toLocaleString("tr-TR", {
+      {shown.toLocaleString(bicimEtiketi[dil], {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
       })}

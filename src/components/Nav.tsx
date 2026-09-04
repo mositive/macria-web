@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { nav, site } from "@/lib/site";
+import { yol, type Dil, type Sozluk } from "@/lib/i18n";
 import { IndirIkonu } from "./IndirIkonu";
+import { DilSecici } from "./DilSecici";
 
-export function Nav() {
+export function Nav({ dil, s }: { dil: Dil; s: Sozluk }) {
   const { scrollY } = useScroll();
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
@@ -29,7 +31,7 @@ export function Nav() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-3.5">
-          <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+          <Link href={yol(dil)} className="flex shrink-0 items-center gap-2.5">
             <Image
               src="/macria-logo.png"
               alt=""
@@ -46,35 +48,38 @@ export function Nav() {
             {nav.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={yol(dil, item.href)}
                 className="relative rounded-lg px-3.5 py-2 text-sm text-slate-300 transition-colors hover:text-white"
               >
-                <span className="relative z-10">{item.label}</span>
+                <span className="relative z-10">{s.nav[item.anahtar]}</span>
                 <span className="absolute inset-0 scale-90 rounded-lg bg-white/5 opacity-0 transition-all duration-200 hover:scale-100 hover:opacity-100" />
               </Link>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
+            <div className="hidden sm:block">
+              <DilSecici dil={dil} s={s} />
+            </div>
             <a
               href={site.github}
               target="_blank"
               rel="noreferrer"
-              className="btn btn-secondary hidden px-3.5 py-2 text-sm sm:inline-flex"
+              className="btn btn-secondary hidden px-3.5 py-2 text-sm lg:inline-flex"
             >
               GitHub
             </a>
             <Link
-              href="/indir"
+              href={yol(dil, "/indir")}
               className="btn btn-primary btn-indir gap-2 px-3.5 py-2.5 text-sm sm:py-2"
             >
               <IndirIkonu boyut={15} />
-              İndir
+              {s.nav.indir}
             </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+              aria-label={open ? s.nav.menuKapat : s.nav.menuAc}
               aria-expanded={open}
               aria-controls="mobil-menu"
               className="btn btn-secondary size-11 md:hidden"
@@ -100,11 +105,11 @@ export function Nav() {
             {nav.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={yol(dil, item.href)}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-2 py-3.5 text-[0.95rem] text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
               >
-                {item.label}
+                {s.nav[item.anahtar]}
               </Link>
             ))}
             <a
@@ -119,6 +124,12 @@ export function Nav() {
                 <path d="M7 17L17 7M8 7h9v9" />
               </svg>
             </a>
+
+            {/* Dil seçici mobilde başlık çubuğuna sığmıyor, menüde duruyor. */}
+            <div className="mt-3 flex items-center justify-between px-2">
+              <span className="text-xs text-slate-500">{s.dil.etiket}</span>
+              <DilSecici dil={dil} s={s} />
+            </div>
           </div>
         </motion.div>
       </div>

@@ -3,12 +3,13 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { Reveal } from "./Reveal";
+import type { Sozluk } from "@/lib/i18n";
 
+// Numara ve ikon burada, başlık ile metin sözlükte (pipeline.adimlar);
+// sıraları aynı.
 const steps = [
   {
     n: "01",
-    t: "Bağlanır",
-    d: "Açık olan 3DEXPERIENCE (CATIA V6) oturumuna COM üzerinden bağlanır. ProgID bulunamayan kurumsal makinelerde CLSID ve ROT taramasına düşer.",
     icon: (
       <>
         <path d="M9 7V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3" />
@@ -19,8 +20,6 @@ const steps = [
   },
   {
     n: "02",
-    t: "Ağacı tarar",
-    d: "Aktif montajın ürün ağacını baştan sona gezer, sac (sheet metal) parçaları ayıklar ve tekrar edenleri adet olarak toplar.",
     icon: (
       <>
         <rect x="3" y="3" width="7" height="5" rx="1" />
@@ -32,8 +31,6 @@ const steps = [
   },
   {
     n: "03",
-    t: "Tabloya döker",
-    d: "Ürün adı, parça adı, kalınlık ve adet tek tabloda. Sütunları siz seçersiniz, kendi formül sütunlarınızı eklersiniz.",
     icon: (
       <>
         <rect x="3" y="4" width="18" height="16" rx="2" />
@@ -43,8 +40,6 @@ const steps = [
   },
   {
     n: "04",
-    t: "İşi devralır",
-    d: "Seçtiğiniz aracı çalıştırır: DXF aktarımında panelleri sizin yerinize sürer, maliyet aracında tabloyu hesaplar. Üstte duran ilerleme penceresi ve acil durdurma hep elinizin altında.",
     icon: (
       <>
         <path d="M13 2v6h6" />
@@ -55,7 +50,7 @@ const steps = [
   },
 ];
 
-export function Pipeline() {
+export function Pipeline({ s }: { s: Sozluk }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -69,12 +64,10 @@ export function Pipeline() {
       <div className="mx-auto max-w-6xl">
         <Reveal className="max-w-2xl">
           <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-5xl">
-            Dört Adım, Tek Pencere.
+            {s.pipeline.baslik}
           </h2>
           <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
-            Hangi aracı kullanırsanız kullanın akış aynı — ve araç seti büyüdükçe de aynı
-            kalacak. Uygulamayı açın, montaj zaten 3DEXPERIENCE&apos;ta açıksa gerisi
-            kendiliğinden gelir.
+            {s.pipeline.aciklama}
           </p>
         </Reveal>
 
@@ -88,9 +81,9 @@ export function Pipeline() {
           </div>
 
           <ol className="space-y-8 sm:space-y-10 md:space-y-16">
-            {steps.map((s, i) => (
+            {steps.map((adim, i) => (
               <li
-                key={s.n}
+                key={adim.n}
                 className="relative flex items-start gap-4 sm:gap-5 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-0"
               >
                 {/* düğüm — mobilde solda, masaüstünde ortada */}
@@ -106,7 +99,7 @@ export function Pipeline() {
                       className="absolute inset-0 animate-pulse-ring rounded-full border border-brand-400/30"
                       style={{ animationDelay: `${i * 0.4}s` }}
                     />
-                    {s.n}
+                    {adim.n}
                   </motion.span>
                 </div>
 
@@ -124,12 +117,16 @@ export function Pipeline() {
                     <div className={`flex items-center gap-3 ${i % 2 ? "" : "md:flex-row-reverse"}`}>
                       <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-brand-500/25 bg-brand-500/10 text-brand-300 transition-colors group-hover:border-brand-400/50 group-hover:text-accent sm:size-10">
                         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                          {s.icon}
+                          {adim.icon}
                         </svg>
                       </span>
-                      <h3 className="font-display text-lg font-semibold text-white sm:text-xl">{s.t}</h3>
+                      <h3 className="font-display text-lg font-semibold text-white sm:text-xl">
+                        {s.pipeline.adimlar[i].baslik}
+                      </h3>
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-400">{s.d}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                      {s.pipeline.adimlar[i].metin}
+                    </p>
                   </div>
                 </motion.div>
               </li>

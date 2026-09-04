@@ -2,13 +2,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import type { SurumBilgisi } from "@/lib/github";
+import { yol, type Dil, type Sozluk } from "@/lib/i18n";
 import { IndirIkonu } from "./IndirIkonu";
 
 /**
  * Ana sayfanın kapanış şeridi. İndirme kartının kendisi /indir sayfasında;
  * burada yalnızca oraya götüren kısa bir çağrı var.
  */
-export function DownloadCta({ surum }: { surum: SurumBilgisi }) {
+export function DownloadCta({
+  dil,
+  s,
+  surum,
+}: {
+  dil: Dil;
+  s: Sozluk;
+  surum: SurumBilgisi;
+}) {
   return (
     <section className="relative px-4 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-6xl">
@@ -17,20 +26,18 @@ export function DownloadCta({ surum }: { surum: SurumBilgisi }) {
             <div className="relative flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="font-display text-[1.5rem] leading-tight font-semibold tracking-tight text-white sm:text-3xl">
-                  Bir Sonraki Montajda Kullanın.
+                  {s.kapanis.baslik}
                 </h2>
                 <p className="mt-3 max-w-md text-[0.95rem] text-slate-300/90">
-                  Kurulum yok, taşınabilir tek dosya, çevrimdışı çalışır.
-                  İndirme sayfasında dosyanın doğrulama bilgileri ve sürüm
-                  geçmişi de var.
+                  {s.kapanis.aciklama}
                 </p>
 
                 <Link
-                  href="/indir"
+                  href={yol(dil, "/indir")}
                   className="btn btn-primary btn-indir mt-7 flex-wrap gap-y-1 px-6 py-3.5"
                 >
                   <IndirIkonu />
-                  İndirme sayfasına git
+                  {s.kapanis.tus}
                   <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
                     v{surum.surum}
                   </span>

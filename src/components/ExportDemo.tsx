@@ -3,20 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { Reveal } from "./Reveal";
+import type { Sozluk } from "@/lib/i18n";
 
+// Parça adları sözlükte (dxf.parcalar); kalınlık ve adet dile bağlı değil.
 const parts = [
-  { ad: "YAN-PANEL-SOL", kalinlik: "2,0", adet: 2 },
-  { ad: "TABAN-SACI", kalinlik: "3,0", adet: 1 },
-  { ad: "KAPAK-ON", kalinlik: "1,5", adet: 4 },
-  { ad: "BRAKET-U", kalinlik: "4,0", adet: 8 },
-  { ad: "ARKA-KAPAK", kalinlik: "2,0", adet: 1 },
-  { ad: "GUSSET-30", kalinlik: "5,0", adet: 6 },
-  { ad: "MENTESE-PLK", kalinlik: "3,0", adet: 4 },
+  { kalinlik: "2,0", adet: 2 },
+  { kalinlik: "3,0", adet: 1 },
+  { kalinlik: "1,5", adet: 4 },
+  { kalinlik: "4,0", adet: 8 },
+  { kalinlik: "2,0", adet: 1 },
+  { kalinlik: "5,0", adet: 6 },
+  { kalinlik: "3,0", adet: 4 },
 ];
 
 const STEP_MS = 620;
 
-export function ExportDemo() {
+export function ExportDemo({ s }: { s: Sozluk }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-120px" });
   const [done, setDone] = useState(0);
@@ -38,21 +40,14 @@ export function ExportDemo() {
       <div className="mx-auto grid max-w-6xl items-center gap-10 sm:gap-14 lg:grid-cols-2 lg:gap-16">
         <Reveal>
           <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
-            Yüz Parçalık Montajda Da Tek Tuş.
+            {s.dxf.baslik}
           </h2>
           <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
-            Parçaları tek tek açıp &quot;Save As DXF&quot; demek yerine listeyi seçip başlatın.
-            Macria panelleri sizin yerinize sürer; her adımda hangi parçada olduğunuzu
-            gösteren küçük pencere bütün uygulamaların üstünde kalır.
+            {s.dxf.aciklama}
           </p>
 
           <ul className="mt-7 space-y-3.5 sm:mt-8">
-            {[
-              "Seçili parça ya da listenin tamamı",
-              "Üstte duran ilerleme penceresi (PiP)",
-              "Tek tuşla acil durdurma",
-              "Aktarım biter bitmez klasörü aç",
-            ].map((t, i) => (
+            {s.dxf.maddeler.map((t, i) => (
               <motion.li
                 key={t}
                 initial={{ opacity: 0, x: -14 }}
@@ -89,25 +84,26 @@ export function ExportDemo() {
               <span className="size-2.5 rounded-full bg-slate-600" />
               <span className="size-2.5 rounded-full bg-brand-500" />
               <span className="ml-2 font-mono text-xs text-slate-400">
-                Macria — Montaj1
+                {s.dxf.pencereBasligi}
               </span>
             </div>
 
             {/* tablo */}
             <div className="p-3 sm:p-4">
               <div className="grid grid-cols-[1fr_2.6rem_2.2rem_1.4rem] gap-2 border-b border-line/60 px-1.5 pb-2 font-mono text-[10px] tracking-wider text-slate-500 uppercase sm:grid-cols-[1fr_3.2rem_2.6rem_1.6rem] sm:px-2">
-                <span>Parça</span>
-                <span className="text-right">Kal.</span>
-                <span className="text-right">Adet</span>
+                <span>{s.dxf.sutunlar.parca}</span>
+                <span className="text-right">{s.dxf.sutunlar.kalinlik}</span>
+                <span className="text-right">{s.dxf.sutunlar.adet}</span>
                 <span />
               </div>
 
               <ul className="mt-1">
                 {parts.map((p, i) => {
                   const state = i < done ? "ok" : i === done ? "run" : "wait";
+                  const ad = s.dxf.parcalar[i];
                   return (
                     <li
-                      key={p.ad}
+                      key={ad}
                       className={`grid grid-cols-[1fr_2.6rem_2.2rem_1.4rem] items-center gap-2 rounded-lg px-1.5 py-2 text-xs transition-colors duration-300 sm:grid-cols-[1fr_3.2rem_2.6rem_1.6rem] sm:px-2 ${
                         state === "run" ? "bg-brand-500/10" : ""
                       }`}
@@ -117,7 +113,7 @@ export function ExportDemo() {
                           state === "wait" ? "text-slate-500" : "text-slate-200"
                         }`}
                       >
-                        {p.ad}
+                        {ad}
                       </span>
                       <span className="text-right font-mono text-slate-400">{p.kalinlik}</span>
                       <span className="text-right font-mono text-slate-400">{p.adet}</span>
@@ -178,8 +174,8 @@ export function ExportDemo() {
               <div className="flex items-center justify-between gap-3 font-mono text-[11px]">
                 <span className={`truncate ${finished ? "text-accent" : "text-slate-400"}`}>
                   {finished
-                    ? "Aktarım tamamlandı"
-                    : `Aktarılıyor — ${parts[Math.min(done, parts.length - 1)].ad}`}
+                    ? s.dxf.tamamlandi
+                    : `${s.dxf.aktariliyor} — ${s.dxf.parcalar[Math.min(done, parts.length - 1)]}`}
                 </span>
                 <span className="shrink-0 text-slate-300">
                   {Math.min(done, parts.length)}/{parts.length}
@@ -206,7 +202,7 @@ export function ExportDemo() {
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] tracking-wider text-brand-300 uppercase">
-                DXF aktarımı
+                {s.dxf.ilerlemeBasligi}
               </span>
               <span className="font-mono text-[10px] text-slate-500">%{pct}</span>
             </div>
@@ -223,7 +219,7 @@ export function ExportDemo() {
               aria-hidden
               className="mt-3 w-full rounded-lg border border-red-500/30 bg-red-500/10 py-1.5 text-[11px] font-medium text-red-300"
             >
-              Durdur
+              {s.dxf.durdur}
             </button>
           </motion.div>
         </motion.div>

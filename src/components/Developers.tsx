@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 import { gelistiriciler, type Gelistirici } from "@/lib/site";
+import type { Dil, Sozluk } from "@/lib/i18n";
 
 function LinkedInIkonu() {
   return (
@@ -18,7 +19,7 @@ function basHarfler(ad: string) {
   return (ilk.charAt(0) + son.charAt(0)).toLocaleUpperCase("tr-TR");
 }
 
-function Kart({ g }: { g: Gelistirici }) {
+function Kart({ g, dil }: { g: Gelistirici; dil: Dil }) {
   return (
     <a
       href={g.linkedin}
@@ -48,7 +49,7 @@ function Kart({ g }: { g: Gelistirici }) {
         <span className="block truncate font-display text-lg font-semibold text-white">
           {g.ad}
         </span>
-        <span className="mt-1 block text-sm text-slate-400">{g.rol}</span>
+        <span className="mt-1 block text-sm text-slate-400">{g.rol[dil]}</span>
         <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-brand-300 transition-colors group-hover:text-accent">
           <LinkedInIkonu />
           LinkedIn
@@ -72,7 +73,7 @@ function Kart({ g }: { g: Gelistirici }) {
   );
 }
 
-export function Developers() {
+export function Developers({ dil, s }: { dil: Dil; s: Sozluk }) {
   // Ekip tanımlanmadıysa boş bir başlık basmanın anlamı yok.
   if (gelistiriciler.length === 0) return null;
 
@@ -81,22 +82,20 @@ export function Developers() {
       <div className="mx-auto max-w-6xl">
         <Reveal className="max-w-2xl">
           <div className="font-mono text-[10px] tracking-[0.18em] text-brand-300/80 uppercase">
-            Geliştiriciler
+            {s.gelistiriciler.etiket}
           </div>
           <h2 className="mt-4 font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-5xl">
-            Macria&apos;yı Yazan Ekip.
+            {s.gelistiriciler.baslik}
           </h2>
           <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
-            Macria, sahada CATIA kullanan mühendisler tarafından geliştiriliyor.
-            Sorularınız ve iş birliği önerileriniz için LinkedIn üzerinden
-            ulaşabilirsiniz.
+            {s.gelistiriciler.aciklama}
           </p>
         </Reveal>
 
         <RevealGroup className="mt-10 grid gap-3.5 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {gelistiriciler.map((g) => (
             <RevealItem key={g.linkedin}>
-              <Kart g={g} />
+              <Kart g={g} dil={dil} />
             </RevealItem>
           ))}
         </RevealGroup>

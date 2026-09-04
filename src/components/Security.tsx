@@ -4,17 +4,26 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Reveal } from "./Reveal";
 import { site } from "@/lib/site";
+import { bicimEtiketi, doldur, type Dil, type Sozluk } from "@/lib/i18n";
 import type { SurumBilgisi } from "@/lib/github";
 
-function mbOlarak(bayt: number) {
-  return (bayt / 1024 / 1024).toLocaleString("tr-TR", {
+function mbOlarak(bayt: number, dil: Dil) {
+  return (bayt / 1024 / 1024).toLocaleString(bicimEtiketi[dil], {
     maximumFractionDigits: 0,
   });
 }
 
-function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
+function VirusTotalPaneli({
+  dil,
+  s,
+  surum,
+}: {
+  dil: Dil;
+  s: Sozluk;
+  surum: SurumBilgisi;
+}) {
   const vt = surum.virustotal;
-  const boyutMB = mbOlarak(surum.boyutBayt);
+  const boyutMB = mbOlarak(surum.boyutBayt, dil);
   const [kopyalandi, setKopyalandi] = useState(false);
 
   async function ozetiKopyala() {
@@ -39,10 +48,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
             VirusTotal
           </div>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">
-            Sürüm {surum.surum} yeni yayınlandı; tarama raporu ve dosya parmak
-            izi henüz hazır değil. Dilerseniz indirdiğiniz dosyayı
-            VirusTotal&apos;e kendiniz yükleyip tarama sonucunu hemen
-            görebilirsiniz.
+            {doldur(s.guvenlik.raporYokBaslik, { surum: surum.surum })}
           </p>
 
           <div className="mt-6 flex flex-col gap-x-7 gap-y-4 sm:flex-row sm:flex-wrap sm:items-center">
@@ -52,7 +58,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
               rel="noreferrer"
               className="group inline-flex items-center gap-2 text-sm font-medium text-brand-300 transition-colors hover:text-accent"
             >
-              VirusTotal&apos;e yükle
+              {s.guvenlik.vtYukle}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -63,7 +69,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
               rel="noreferrer"
               className="group inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
             >
-              Kaynak kodu incele
+              {s.guvenlik.kaynakKodu}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -85,10 +91,9 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
             VirusTotal
           </div>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">
-            Bu sürümün tarama raporu henüz hazır değil. Ama beklemenize gerek yok:
-            indirdiğiniz dosyanın{" "}
-            <span className="text-white">bizim yayınladığımız dosyanın aynısı</span>{" "}
-            olduğunu şimdi kendiniz doğrulayabilirsiniz.
+            {s.guvenlik.ozetGiris}{" "}
+            <span className="text-white">{s.guvenlik.ozetVurgu}</span>{" "}
+            {s.guvenlik.ozetSon}
           </p>
 
           <div className="mt-7">
@@ -101,7 +106,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
                 onClick={ozetiKopyala}
                 className="rounded-lg border border-line px-3.5 py-2.5 font-mono text-[10px] tracking-[0.14em] text-slate-400 uppercase transition-colors hover:border-brand-400/50 hover:text-white"
               >
-                {kopyalandi ? "Kopyalandı" : "Kopyala"}
+                {kopyalandi ? s.guvenlik.kopyalandi : s.guvenlik.kopyala}
               </button>
             </div>
             <p className="mt-2 rounded-xl border border-line bg-white/[0.03] p-4 font-mono text-[11px] leading-relaxed break-all text-slate-300">
@@ -111,8 +116,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
 
           <div className="mt-4 rounded-xl border border-line/60 bg-white/[0.02] p-4">
             <p className="text-xs leading-relaxed text-slate-400">
-              İndirdiğiniz dosyanın bulunduğu klasörde PowerShell&apos;i açıp şunu
-              çalıştırın — çıkan özet yukarıdakiyle birebir aynı olmalı:
+              {s.guvenlik.powershellNot}
             </p>
             <code className="scroll-x mt-2 block font-mono text-[11px] whitespace-nowrap text-brand-300">
               Get-FileHash .\{surum.dosya} -Algorithm SHA256
@@ -126,7 +130,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
               rel="noreferrer"
               className="group inline-flex items-center gap-2 text-sm font-medium text-brand-300 transition-colors hover:text-accent"
             >
-              Bu özeti VirusTotal&apos;de sorgula
+              {s.guvenlik.ozetSorgula}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -137,7 +141,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
               rel="noreferrer"
               className="group inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
             >
-              Kaynak kodu incele
+              {s.guvenlik.kaynakKodu}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -186,12 +190,12 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
           <div>
             <p className="max-w-xs text-sm leading-relaxed text-slate-300">
               {temiz
-                ? "Hiçbir antivirüs motoru tehdit bulmadı."
-                : `${vt.tespit} motor dosyayı işaretledi — ayrıntı için rapora bakın.`}
+                ? s.guvenlik.temiz
+                : doldur(s.guvenlik.tespitVar, { sayi: vt.tespit })}
             </p>
             <p className="mt-2 font-mono text-[11px] text-slate-500">
               {surum.dosya} · {boyutMB} MB ·{" "}
-              {new Date(vt.tarandi).toLocaleDateString("tr-TR")}
+              {new Date(vt.tarandi).toLocaleDateString(bicimEtiketi[dil])}
             </p>
           </div>
         </div>
@@ -200,7 +204,7 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
             kendi değil kartın üzerinden tetikleniyor — o yüzden btn-secondary
             yerine yalnızca iskeleti (btn) alıp durumları group-hover veriyor. */}
         <span className="btn shrink-0 self-stretch border border-line bg-white/[0.035] px-5 py-3.5 text-sm text-slate-300 transition-all group-hover:border-[#3f3f47] group-hover:bg-white/[0.075] group-hover:text-white md:self-auto md:py-3">
-          Raporu aç
+          {s.guvenlik.raporuAc}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
@@ -224,27 +228,34 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
           ))}
         </div>
         <p className="mt-4 text-center font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
-          {vt.toplam} motor tarandı
+          {doldur(s.guvenlik.motorTarandi, { sayi: vt.toplam })}
         </p>
       </div>
     </a>
   );
 }
 
-export function Security({ surum }: { surum: SurumBilgisi }) {
+export function Security({
+  dil,
+  s,
+  surum,
+}: {
+  dil: Dil;
+  s: Sozluk;
+  surum: SurumBilgisi;
+}) {
   return (
     <section id="guvenlik" className="relative px-4 py-20 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <Reveal className="max-w-2xl">
           <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-5xl">
-            İndirdiğiniz Dosyanın Ne Olduğunu Bilin.
+            {s.guvenlik.baslik}
           </h2>
           <p className="mt-4 text-[0.95rem] text-slate-400 sm:text-lg">
-            Kurumsal bir makineye indirdiğiniz imzasız bir exe&apos;ye körü körüne
-            güvenmenizi beklemiyoruz.{" "}
+            {s.guvenlik.aciklamaGiris}{" "}
             {surum.virustotal
-              ? "Yayınlanan Macria sürümleri VirusTotal tarafından taranır ve raporlanır."
-              : "Yayınlanan dosyanın parmak izini kullanarak kendi indirdiğiniz dosyanın bütünlüğünü doğrulayabilirsiniz."}
+              ? s.guvenlik.aciklamaRaporVar
+              : s.guvenlik.aciklamaRaporYok}
           </p>
         </Reveal>
 
@@ -255,7 +266,7 @@ export function Security({ surum }: { surum: SurumBilgisi }) {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mt-10"
         >
-          <VirusTotalPaneli surum={surum} />
+          <VirusTotalPaneli dil={dil} s={s} surum={surum} />
         </motion.div>
 
         {/* imza notu */}
@@ -270,10 +281,10 @@ export function Security({ surum }: { surum: SurumBilgisi }) {
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
           <p>
-            <span className="text-slate-200">Bu program henüz imzalanmamıştır.</span> Bu yüzden
-            Windows SmartScreen ilk açılışta sizi uyarabilir. {" "}
-            <span className="font-mono text-slate-300"> Ek bilgi → Yine de çalıştır</span> seçimini yaparak programı kullanmaya başlayabilirsiniz.
-            Uyarı dosyanın zararlı olduğunu değil, imzasının henüz tanınmadığını belirtmektedir.
+            <span className="text-slate-200">{s.guvenlik.imzaVurgu}</span>{" "}
+            {s.guvenlik.imzaMetin}{" "}
+            <span className="font-mono text-slate-300">{s.guvenlik.imzaKomut}</span>{" "}
+            {s.guvenlik.imzaSon}
           </p>
         </motion.div>
       </div>

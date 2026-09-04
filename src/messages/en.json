@@ -1,0 +1,228 @@
+{
+  "dil": {
+    "ad": "English",
+    "kisa": "EN",
+    "digerineGec": "Türkçe'ye geç",
+    "etiket": "Language"
+  },
+  "meta": {
+    "anaSayfa": {
+      "baslik": "The toolkit that takes the repetition out of CATIA",
+      "aciklama": "A desktop toolkit that takes over repetitive work in 3DEXPERIENCE (CATIA V6). Sheet metal part lists, batch DXF export, weight and cost calculation — all in one window.",
+      "ogAciklama": "A desktop toolkit that brings repetitive CATIA work into a single window."
+    },
+    "indir": {
+      "baslik": "Download",
+      "aciklama": "Download Macria: a single file with no installer, file verification details, and release notes for every version."
+    },
+    "destek": {
+      "baslik": "Support",
+      "aciklama": "Macria is free and open source. A support option for those who want to contribute voluntarily to its development."
+    }
+  },
+  "nav": {
+    "araclar": "Toolkit",
+    "nasilCalisir": "How it works",
+    "indir": "Download",
+    "destek": "Support",
+    "menuAc": "Open menu",
+    "menuKapat": "Close menu"
+  },
+  "hero": {
+    "baslikUst": "Repetitive work,",
+    "baslikAlt": "one window, one click.",
+    "aciklama": "Macria connects to the assembly you already have open in 3DEXPERIENCE and does the repetitive work for you. No installation, works offline.",
+    "indirTusu": "Download for Windows",
+    "nasilTusu": "How does it work?",
+    "virustotal": "Scanned by VirusTotal:",
+    "virustotalSonuc": "Clean",
+    "kapilar": [
+      { "baslik": "Batch DXF export", "metin": "One click on a hundred-part assembly." },
+      { "baslik": "Sheet metal part list", "metin": "Thickness and quantity on one screen." },
+      { "baslik": "Weight and cost", "metin": "Straight from the flat pattern." }
+    ]
+  },
+  "pipeline": {
+    "baslik": "Four Steps, One Window.",
+    "aciklama": "Whichever tool you use, the flow is the same — and it will stay the same as the toolkit grows. Open the app; if the assembly is already open in 3DEXPERIENCE, the rest follows on its own.",
+    "adimlar": [
+      {
+        "baslik": "It connects",
+        "metin": "Connects over COM to your running 3DEXPERIENCE (CATIA V6) session. On corporate machines where the ProgID is missing, it falls back to a CLSID and ROT scan."
+      },
+      {
+        "baslik": "It scans the tree",
+        "metin": "Walks the active assembly's product tree end to end, picks out the sheet metal parts and rolls up duplicates as quantities."
+      },
+      {
+        "baslik": "It fills the table",
+        "metin": "Product name, part name, thickness and quantity in one table. You choose the columns and add your own formula columns."
+      },
+      {
+        "baslik": "It takes over",
+        "metin": "Runs the tool you pick: it drives the panels for you during DXF export, and computes the table in the cost tool. The always-on-top progress window and the emergency stop stay within reach."
+      }
+    ]
+  },
+  "features": {
+    "baslik": "One App, A Growing Toolkit.",
+    "aciklama": "Instead of hunting for a separate macro file for every job, they all live in one window. The list below is ready today — and it gets longer with every release.",
+    "kartlar": [
+      {
+        "baslik": "Batch DXF export",
+        "metin": "Export every sheet metal part in the list with a single click. The always-on-top progress window shows where it is, and the emergency stop is always within reach."
+      },
+      {
+        "baslik": "Assembly tree scan",
+        "metin": "Walks the active assembly's tree end to end and collects the parts you're after, merging duplicates into quantities. Every other tool works on top of this list."
+      },
+      {
+        "baslik": "Weight and cost",
+        "metin": "Weight from thickness, flat pattern area and material density; cost from the unit price. Mild steel, galvanised, Hardox, stainless and aluminium come built in."
+      },
+      {
+        "baslik": "DXF preview",
+        "metin": "See the flat pattern inside the exported file before you open it. Did it come out empty, is it the shape you expected — you can tell at a glance."
+      },
+      {
+        "baslik": "Formula columns",
+        "metin": "Add your own column to the table and build a calculation from the other columns. Functions like min, max, sqrt and round work under both their English and Turkish names."
+      },
+      {
+        "baslik": "Heat-mapped table",
+        "metin": "Numeric cells are shaded within their own column, so the most expensive, heaviest and thickest part stands out the moment you look at the list."
+      },
+      {
+        "baslik": "Charts and reports",
+        "metin": "See the distribution as a chart and export the result to Excel or PDF. Charts are drawn inside the app, with no external library."
+      },
+      {
+        "baslik": "No installer, no internet",
+        "metin": "A single portable exe. It asks for no administrator rights and looks for no internet connection — it even runs from a USB stick on an air-gapped machine."
+      }
+    ],
+    "oneri": {
+      "baslik": "What should come next?",
+      "metin": "If there's something you do by hand every day, tell us — let that be the next thing added to the toolkit.",
+      "tus": "Suggest it on GitHub"
+    }
+  },
+  "dxf": {
+    "baslik": "One Click, Even On A Hundred Parts.",
+    "aciklama": "Instead of opening parts one by one and hitting \"Save As DXF\", select the list and start. Macria drives the panels for you, and a small window showing which part it's on stays above every other application.",
+    "maddeler": [
+      "The selected part or the whole list",
+      "Always-on-top progress window (PiP)",
+      "One-key emergency stop",
+      "Open the folder as soon as the export finishes"
+    ],
+    "pencereBasligi": "Macria — Assembly1",
+    "sutunlar": { "parca": "Part", "kalinlik": "Thk.", "adet": "Qty" },
+    "parcalar": [
+      "SIDE-PANEL-L",
+      "BASE-PLATE",
+      "FRONT-COVER",
+      "BRACKET-U",
+      "REAR-COVER",
+      "GUSSET-30",
+      "HINGE-PLATE"
+    ],
+    "tamamlandi": "Export complete",
+    "aktariliyor": "Exporting",
+    "ilerlemeBasligi": "DXF export",
+    "durdur": "Stop"
+  },
+  "maliyet": {
+    "baslik": "Don't Wait On A Spreadsheet To Quote.",
+    "aciklama": "You already have the flat pattern area, the thickness and the material density. Macria combines them and gives you the weight and cost of every part alongside the list. Change the material and the whole table recalculates instantly.",
+    "toplamAgirlik": "Total weight",
+    "toplamMaliyet": "Total cost",
+    "not": "Densities come built into the app; you can add an alloy that isn't in the list yourself. The unit price is yours — the values here are only an example.",
+    "tabloBasligi": "Cost table",
+    "malzemeler": ["Mild steel / S235", "Stainless 304", "Aluminium 5754", "Copper"],
+    "parcalar": ["SIDE-PANEL-L", "BASE-PLATE", "FRONT-COVER", "BRACKET-U", "GUSSET-30"],
+    "sutunlar": {
+      "parca": "Part",
+      "kalinlik": "Thk.",
+      "alan": "Area m²",
+      "agirlik": "Weight",
+      "maliyet": "Cost",
+      "toplam": "Total"
+    }
+  },
+  "gelistiriciler": {
+    "etiket": "Developers",
+    "baslik": "The Team Behind Macria.",
+    "aciklama": "Macria is built by engineers who use CATIA on the job. For questions and collaboration, reach out on LinkedIn."
+  },
+  "kapanis": {
+    "baslik": "Use It On Your Next Assembly.",
+    "aciklama": "No installer, a single portable file, works offline. The download page also has the file verification details and the release history.",
+    "tus": "Go to the download page"
+  },
+  "indirme": {
+    "baslik": "Use It On Your Next Assembly.",
+    "aciklama": "Download it and double-click. No installer, no internet connection needed.",
+    "tus": "Download Macria.exe",
+    "tumSurumler": "All releases",
+    "taramaRaporu": "VirusTotal scan report",
+    "surumGecmisi": "Release history",
+    "gereksinimler": [
+      { "baslik": "Operating system", "deger": "Windows 10 / 11 · x64" },
+      { "baslik": "CAD", "deger": "3DEXPERIENCE · CATIA V6" },
+      { "baslik": "Runtime", "deger": ".NET 8" },
+      { "baslik": "Installation", "deger": "None, a single portable file." },
+      { "baslik": "Internet", "deger": "Not needed, works offline." }
+    ]
+  },
+  "guvenlik": {
+    "baslik": "Know What You're Downloading.",
+    "aciklamaGiris": "We don't expect you to blindly trust an unsigned exe you've downloaded onto a corporate machine.",
+    "aciklamaRaporVar": "Published Macria releases are scanned and reported by VirusTotal.",
+    "aciklamaRaporYok": "You can use the published file's fingerprint to verify the integrity of the file you downloaded.",
+    "raporYokBaslik": "Version {surum} was just released; the scan report and the file fingerprint aren't ready yet. If you like, you can upload the file you downloaded to VirusTotal yourself and see the scan result right away.",
+    "vtYukle": "Upload to VirusTotal",
+    "kaynakKodu": "Review the source code",
+    "ozetGiris": "The scan report for this release isn't ready yet. But there's no need to wait: you can verify right now that the file you downloaded is",
+    "ozetVurgu": "exactly the file we published",
+    "ozetSon": "yourself.",
+    "kopyala": "Copy",
+    "kopyalandi": "Copied",
+    "powershellNot": "Open PowerShell in the folder where you downloaded the file and run this — the hash it prints must match the one above exactly:",
+    "ozetSorgula": "Look this hash up on VirusTotal",
+    "temiz": "No antivirus engine flagged a threat.",
+    "tespitVar": "{sayi} engines flagged the file — check the report for details.",
+    "raporuAc": "Open the report",
+    "motorTarandi": "{sayi} engines scanned",
+    "imzaVurgu": "This program is not code-signed yet.",
+    "imzaMetin": "Because of that, Windows SmartScreen may warn you the first time you run it.",
+    "imzaKomut": "More info → Run anyway",
+    "imzaSon": "will let you start using the program. The warning means the signature isn't recognised yet, not that the file is harmful."
+  },
+  "surumler": {
+    "etiket": "Release history",
+    "baslik": "What Changed In Each Release?",
+    "aciklama": "Below you'll find the features added to Macria, the changes made and the fixes shipped with each new release. The notes for every version make it easier to keep up with updates and discover new features.",
+    "notYok": "No notes were written for this release.",
+    "guncel": "Latest",
+    "onSurum": "Pre-release",
+    "githubdaAc": "Open on GitHub",
+    "dahaGoster": "Show {sayi} earlier releases",
+    "tumYayinlar": "All releases on GitHub"
+  },
+  "destek": {
+    "etiket": "Support",
+    "baslik": "Support Macria's Development.",
+    "aciklama": "Macria is completely free and open source. Your support helps new features get added, bugs get fixed, and Macria become a better tool overall.",
+    "bilgiEtiket": "Please note",
+    "bilgiMetin": "Your support is processed securely through Shopier. Payment details are handled directly by Shopier and are never stored on the Macria website.",
+    "tus": "Support",
+    "yakinda": "The payment setup is being prepared, coming very soon.",
+    "dipnot": "Support is entirely voluntary; paying does not grant you any additional rights, priority or licence."
+  },
+  "altbilgi": {
+    "surumGecmisi": "Release history",
+    "surum": "Version",
+    "marka": "CATIA and 3DEXPERIENCE are registered trademarks of Dassault Systèmes. This project is not affiliated with Dassault Systèmes."
+  }
+}

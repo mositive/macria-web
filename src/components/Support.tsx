@@ -1,5 +1,6 @@
 import { support } from "@/lib/site";
 import { Reveal } from "./Reveal";
+import type { Sozluk } from "@/lib/i18n";
 
 // Shopier'e yeni sekmede gidildiğini anlatan dış bağlantı ikonu.
 function DisBaglantiIkonu() {
@@ -22,7 +23,7 @@ function DisBaglantiIkonu() {
   );
 }
 
-export function Support() {
+export function Support({ s }: { s: Sozluk }) {
   // Bağlantı tanımlanmadan bölümü hiç basma: çalışmayan bir destek butonu
   // olmasındansa bölüm hiç olmasın.
   if (!support.shopier.url) return null;
@@ -32,15 +33,13 @@ export function Support() {
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="font-mono text-[10px] tracking-[0.18em] text-brand-300/80 uppercase">
-            Destek ol
+            {s.destek.etiket}
           </div>
           <h2 className="mt-4 font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
-            Macria&apos;nın Geliştirme Sürecini Destekleyin.
+            {s.destek.baslik}
           </h2>
           <p className="mt-4 max-w-xl text-[0.95rem] text-slate-300/90 sm:text-base">
-            Macria tamamen ücretsiz ve açık kaynaklıdır. Destekleriniz, yeni
-            özelliklerin eklenmesine, hataların düzeltilmesine ve genel olarak
-            Macria&apos;nın daha iyi bir araç haline gelmesine yardımcı olur.
+            {s.destek.aciklama}
           </p>
         </Reveal>
 
@@ -49,10 +48,10 @@ export function Support() {
             <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
-                  Bilgilendirme
+                  {s.destek.bilgiEtiket}
                 </div>
                 <p className="mt-2 max-w-md text-sm text-slate-300">
-                  Destekleriniz Shopier üzerinden güvenli bir şekilde işlenir. Ödeme bilgileri doğrudan Shopier tarafından işlenir ve Macria web sitesinde saklanmaz.
+                  {s.destek.bilgiMetin}
                 </p>
               </div>
 
@@ -64,7 +63,7 @@ export function Support() {
                     rel="noreferrer"
                     className="btn btn-primary px-6 py-4 sm:px-7"
                   >
-                    Destek ol
+                    {s.destek.tus}
                     <DisBaglantiIkonu />
                   </a>
                 ) : (
@@ -74,14 +73,14 @@ export function Support() {
                     aria-disabled="true"
                     className="btn cursor-not-allowed border border-line bg-white/[0.03] px-6 py-4 text-slate-500 select-none sm:px-7"
                   >
-                    Destek ol
+                    {s.destek.tus}
                     <DisBaglantiIkonu />
                   </div>
                 )}
 
                 {!support.shopier.aktif && (
                   <p className="mt-2.5 text-center text-[11px] text-slate-500">
-                    Ödeme altyapısı hazırlanıyor, çok yakında.
+                    {s.destek.yakinda}
                   </p>
                 )}
               </div>
@@ -90,8 +89,7 @@ export function Support() {
         </Reveal>
 
         <p className="mt-6 text-xs leading-relaxed text-slate-600">
-          Destek tamamen gönüllüdür; ödeme yapmak size ek bir hak, öncelik ya da
-          lisans sağlamaz.
+          {s.destek.dipnot}
         </p>
       </div>
     </section>

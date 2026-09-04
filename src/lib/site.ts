@@ -1,3 +1,5 @@
+import type { Dil, Sozluk } from "./i18n";
+
 // Tek yerden yönetilen site sabitleri.
 //
 // Sürüm ve indirme bağlantıları artık GitHub Releases API'sinden okunuyor
@@ -19,17 +21,21 @@ export const site = {
 
 // Menü hem başlıkta hem altbilgide kullanılıyor. Çapalar ana sayfadaki
 // bölümlere ait olduğu için "/#..." biçiminde: /indir sayfasından tıklanınca
-// da doğru yere gider.
+// da doğru yere gider. Adresler dil öneksiz; öneki yol() ekliyor.
+//
+// Etiketler burada değil sözlükte (src/messages/*.json → nav.*); buradaki
+// "anahtar" o sözlükteki alanın adı.
 export const nav = [
-  { href: "/#ozellikler", label: "Araç seti" },
-  { href: "/#akis", label: "Nasıl çalışır" },
-  { href: "/indir", label: "İndir" },
-  { href: "/destek", label: "Destek" },
-] as const;
+  { href: "/#ozellikler", anahtar: "araclar" },
+  { href: "/#akis", anahtar: "nasilCalisir" },
+  { href: "/indir", anahtar: "indir" },
+  { href: "/destek", anahtar: "destek" },
+] as const satisfies readonly { href: string; anahtar: keyof Sozluk["nav"] }[];
 
 export type Gelistirici = {
   ad: string;
-  rol: string;
+  /** Rol iki dilde; ekip verisi tek dosyada dursun diye sözlükte değil burada. */
+  rol: Record<Dil, string>;
   linkedin: string;
   /**
    * `public/ekip/` altındaki dosyanın yolu, örn. "/ekip/emre-kocak.jpg".
@@ -48,13 +54,19 @@ export type Gelistirici = {
 export const gelistiriciler: Gelistirici[] = [
   {
     ad: "Emre Koçak",
-    rol: "Geliştirici, Mekatronik Mühendisi",
+    rol: {
+      tr: "Geliştirici, Mekatronik Mühendisi",
+      en: "Developer, Mechatronics Engineer",
+    },
     linkedin: "https://www.linkedin.com/in/",
     foto: "/ekip/emre-kocak.jpg",
   },
   {
     ad: "Enes Yeşilöz",
-    rol: "Geliştirici, Lead Design Engineer",
+    rol: {
+      tr: "Geliştirici, Lead Design Engineer",
+      en: "Developer, Lead Design Engineer",
+    },
     linkedin: "https://www.linkedin.com/in/enesyesiloz/",
     foto: "/ekip/enes-yesiloz.jpg",
   },

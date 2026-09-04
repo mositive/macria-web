@@ -1,9 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import type { SurumBilgisi } from "@/lib/github";
+import { yol, type Dil, type Sozluk } from "@/lib/i18n";
 import { IndirIkonu } from "./IndirIkonu";
+
+// Metin bloklarının sırayla girişi. Işıkların ne zaman yanacağı buradan
+// hesaplandığı için süreler sabit; elle yazılsa biri değişince öteki kayardı.
+const SATIR_SURESI = 0.8;
+const SATIR_ARASI = 0.1;
+const SATIR_SAYISI = 6;
+
+/** Son satır yerine oturduğu an; ışıklar bunu bekliyor. */
+const ISIK_BEKLEME = SATIR_ARASI * (SATIR_SAYISI - 1) + SATIR_SURESI;
 
 const line: Variants = {
   hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
@@ -11,17 +22,36 @@ const line: Variants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: SATIR_SURESI, delay: SATIR_ARASI * i, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
-// Hero'nun altındaki üçlü şerit: sayfanın geri kalanına açılan kapılar.
-// Metinler kısa; ayrıntı zaten ilgili bölümde duruyor.
+/**
+ * Işıkların yanışı: sönükken küçük ve karanlık, sonra açılıp yerine oturuyor.
+ * Sürekli dönen nefes alma animasyonu ayrı katmanda (CSS) — ikisi aynı elemana
+ * binerse CSS animasyonu motion'ın transform'unu eziyor.
+ */
+const isik: Variants = {
+  hidden: { opacity: 0, scale: 0.45 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.5, delay: ISIK_BEKLEME, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+// Nefes alma döngüsü de aynı anda başlasın; "backwards" olmadan bekleme
+// boyunca elemanın kendi durumu görünüyor ve döngü başlarken zıplıyor.
+const dongu = {
+  animationDelay: `${ISIK_BEKLEME}s`,
+  animationFillMode: "backwards" as const,
+};
+
+// Hero'nun altındaki üçlü şeridin adresi ve ikonu. Başlık ve metin sözlükte
+// (hero.kapilar); buradaki sıra oradakiyle aynı.
 const kapilar = [
   {
     href: "#dxf",
-    baslik: "Toplu DXF aktarımı",
-    metin: "Yüz parçalık montajda tek tuş.",
     ikon: (
       <>
         <path d="M12 3v11M7.5 9.5 12 14l4.5-4.5" />
@@ -31,8 +61,6 @@ const kapilar = [
   },
   {
     href: "#ozellikler",
-    baslik: "Sac parça listesi",
-    metin: "Kalınlık ve adet tek ekranda.",
     ikon: (
       <>
         <path d="M4 6h16M4 12h16M4 18h10" />
@@ -41,8 +69,6 @@ const kapilar = [
   },
   {
     href: "#maliyet",
-    baslik: "Ağırlık ve maliyet",
-    metin: "Açınımdan doğrudan hesap.",
     ikon: (
       <>
         <path d="M5 4h14v16H5z" />
@@ -52,7 +78,7 @@ const kapilar = [
   },
 ];
 
-export function Hero({ surum }: { surum: SurumBilgisi }) {
+export function Hero({ dil, s, surum }: { dil: Dil; s: Sozluk; surum: SurumBilgisi }) {
   const ref = useRef<HTMLDivElement>(null);
   const vt = surum.virustotal;
 
@@ -67,24 +93,41 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
       className="relative flex min-h-svh items-center overflow-hidden px-4 pt-28 pb-16 sm:px-8 sm:pt-32 sm:pb-20"
     >
       {/* Alt köşelerden yükselen lacivert-mavi ışıklar. Sayfanın geri kalanı
-          düz antrasit; renk yalnızca burada var. Saf CSS, JS çalışmıyor.
-          Mobilde blur yarıya iner ve animasyon kapanır — tam ekran blur'un
+          düz antrasit; renk yalnızca burada var.
+
+          Metinler yerine oturana kadar ışıklar sönük duruyor, sonra yanıyor:
+          ikisi aynı anda hareket edince göz nereye bakacağını bilemiyordu.
+          Mobilde blur yarıya iner ve nefes alma kapanır — tam ekran blur'un
           her karede yeniden boyanması telefon GPU'sunda kaydırmayı takıyor. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         {/* Her ışık üç katman: geniş lacivert yayılma + içinde daha dar,
             daha parlak bir çekirdek. Tek katman blur'da renk fazla dağılıp
             sönük kalıyordu. */}
-        <div className="absolute -bottom-20 -left-28 h-[11rem] w-[25rem] sm:-bottom-24 sm:-left-36 sm:h-[16rem] sm:w-[42rem] sm:animate-glow-left">
-          <div className="absolute inset-0 rounded-full bg-brand-700/75 blur-[70px] sm:blur-[100px]" />
-          <div className="absolute inset-[20%] rounded-full bg-brand-500/60 blur-[55px] sm:blur-[75px]" />
-          <div className="absolute inset-[38%] rounded-full bg-brand-400/40 blur-[45px] sm:blur-[60px]" />
-        </div>
+        <motion.div
+          variants={isik}
+          initial="hidden"
+          animate="show"
+          className="absolute -bottom-20 -left-28 h-[11rem] w-[25rem] sm:-bottom-24 sm:-left-36 sm:h-[16rem] sm:w-[42rem]"
+        >
+          <div className="size-full sm:animate-glow-left" style={dongu}>
+            <div className="absolute inset-0 rounded-full bg-brand-700/75 blur-[70px] sm:blur-[100px]" />
+            <div className="absolute inset-[20%] rounded-full bg-brand-500/60 blur-[55px] sm:blur-[75px]" />
+            <div className="absolute inset-[38%] rounded-full bg-brand-400/40 blur-[45px] sm:blur-[60px]" />
+          </div>
+        </motion.div>
 
-        <div className="absolute -right-28 -bottom-20 h-[11rem] w-[25rem] sm:-right-36 sm:-bottom-24 sm:h-[16rem] sm:w-[42rem] sm:animate-glow-right">
-          <div className="absolute inset-0 rounded-full bg-brand-700/75 blur-[70px] sm:blur-[100px]" />
-          <div className="absolute inset-[20%] rounded-full bg-brand-500/60 blur-[55px] sm:blur-[75px]" />
-          <div className="absolute inset-[38%] rounded-full bg-brand-400/40 blur-[45px] sm:blur-[60px]" />
-        </div>
+        <motion.div
+          variants={isik}
+          initial="hidden"
+          animate="show"
+          className="absolute -right-28 -bottom-20 h-[11rem] w-[25rem] sm:-right-36 sm:-bottom-24 sm:h-[16rem] sm:w-[42rem]"
+        >
+          <div className="size-full sm:animate-glow-right" style={dongu}>
+            <div className="absolute inset-0 rounded-full bg-brand-700/75 blur-[70px] sm:blur-[100px]" />
+            <div className="absolute inset-[20%] rounded-full bg-brand-500/60 blur-[55px] sm:blur-[75px]" />
+            <div className="absolute inset-[38%] rounded-full bg-brand-400/40 blur-[45px] sm:blur-[60px]" />
+          </div>
+        </motion.div>
       </div>
 
       <motion.div
@@ -102,7 +145,7 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
             animate="show"
             className="block text-slate-200"
           >
-            Tekrar eden işler
+            {s.hero.baslikUst}
           </motion.span>
           <motion.span
             custom={1}
@@ -111,7 +154,7 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
             animate="show"
             className="text-brand-sweep mt-1 block pb-1 sm:mt-2"
           >
-            tek pencerede, tek tuşla.
+            {s.hero.baslikAlt}
           </motion.span>
         </h1>
 
@@ -122,8 +165,7 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
           animate="show"
           className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-slate-400 sm:mt-6 sm:text-lg"
         >
-          Macria, 3DEXPERIENCE&apos;taki açık montajınıza bağlanır ve tekrarlı
-          işleri sizin yerinize yapar. Kurulum gerekmez, çevrimdışı çalışır.
+          {s.hero.aciklama}
         </motion.p>
 
         <motion.div
@@ -133,19 +175,19 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
           animate="show"
           className="mt-8 flex w-full flex-col items-stretch gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:items-center"
         >
-          <a href="/indir" className="btn btn-primary btn-indir px-6 py-3.5">
+          <Link href={yol(dil, "/indir")} className="btn btn-primary btn-indir px-6 py-3.5">
             <IndirIkonu />
-            Windows için indir
-          </a>
+            {s.hero.indirTusu}
+          </Link>
           <a href="#akis" className="btn btn-secondary px-6 py-3.5">
-            Nasıl çalışır?
+            {s.hero.nasilTusu}
           </a>
         </motion.div>
 
         {/* tarama rozeti — ayrıntısı Güvenlik bölümünde */}
         {vt && (
           <motion.a
-            href="/indir#guvenlik"
+            href={yol(dil, "/indir#guvenlik")}
             custom={4}
             variants={line}
             initial="hidden"
@@ -157,11 +199,11 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
                 <path d="M20 6L9 17l-5-5" />
               </svg>
             </span>
-            <span className="font-medium text-slate-200">VirusTotal ile Tarandı:</span>
+            <span className="font-medium text-slate-200">{s.hero.virustotal}</span>
             <span className="font-mono font-medium text-accent">
               {vt.tespit}/{vt.toplam}
             </span>
-            <span className="text-slate-400">Güvenli Yazılım</span>
+            <span className="text-slate-400">{s.hero.virustotalSonuc}</span>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-slate-500 transition-transform group-hover:translate-x-0.5">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
@@ -177,7 +219,7 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
           animate="show"
           className="mt-12 grid w-full gap-px overflow-hidden rounded-2xl border border-line bg-line text-left sm:mt-16 sm:grid-cols-3"
         >
-          {kapilar.map((k) => (
+          {kapilar.map((k, i) => (
             <a
               key={k.href}
               href={k.href}
@@ -198,12 +240,12 @@ export function Hero({ surum }: { surum: SurumBilgisi }) {
                 {k.ikon}
               </svg>
               <div className="mt-3 flex items-center gap-1.5 text-sm font-medium text-slate-100">
-                {k.baslik}
+                {s.hero.kapilar[i].baslik}
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-slate-600 transition-transform group-hover:translate-x-0.5">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </div>
-              <p className="mt-1 text-xs text-slate-500">{k.metin}</p>
+              <p className="mt-1 text-xs text-slate-500">{s.hero.kapilar[i].metin}</p>
             </a>
           ))}
         </motion.div>

@@ -3,17 +3,17 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import type { SurumBilgisi } from "@/lib/github";
+import type { Dil, Sozluk } from "@/lib/i18n";
 import { IndirIkonu } from "./IndirIkonu";
 
-const gereksinimler = [
-  { k: "İşletim sistemi", v: "Windows 10 / 11 · x64" },
-  { k: "CAD", v: "3DEXPERIENCE · CATIA V6" },
-  { k: "Çalışma zamanı", v: ".NET 8" },
-  { k: "Kurulum", v: "Gerekmez, taşınabilir tek dosya." },
-  { k: "İnternet", v: "Gerekmez, çevrimdışı çalışır." },
-];
-
-export function Download({ surum }: { surum: SurumBilgisi }) {
+export function Download({
+  s,
+  surum,
+}: {
+  dil: Dil;
+  s: Sozluk;
+  surum: SurumBilgisi;
+}) {
   return (
     <section id="indir" className="relative px-4 py-20 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-6xl">
@@ -27,11 +27,10 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
           <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto]">
             <div>
               <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
-                Bir Sonraki Montajda Kullanın.
+                {s.indirme.baslik}
               </h2>
               <p className="mt-4 max-w-lg text-[0.95rem] text-slate-300/90 sm:text-base">
-                İndirin, çift tıklayın. Kurulum yok, internet
-                bağlantısı ihtiyacı yok.
+                {s.indirme.aciklama}
               </p>
 
               <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
@@ -40,7 +39,7 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
                   className="btn btn-primary btn-indir flex-wrap gap-y-1 px-6 py-4 sm:px-7"
                 >
                   <IndirIkonu boyut={18} />
-                  Macria.exe indir
+                  {s.indirme.tus}
                   <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
                     v{surum.surum}
                   </span>
@@ -52,7 +51,7 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
                   rel="noreferrer"
                   className="btn btn-secondary px-6 py-4"
                 >
-                  Tüm sürümler
+                  {s.indirme.tumSurumler}
                 </a>
               </div>
 
@@ -64,7 +63,7 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-300">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   </svg>
-                  VirusTotal tarama raporu
+                  {s.indirme.taramaRaporu}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -78,7 +77,7 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
                     <circle cx="12" cy="12" r="9" />
                     <path d="M12 7v5l3.5 2" />
                   </svg>
-                  Sürüm geçmişi
+                  {s.indirme.surumGecmisi}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -101,18 +100,18 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
 
           {/* gereksinimler */}
           <dl className="relative mt-10 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-brand-500/15 pt-7 sm:mt-12 sm:gap-x-8 sm:pt-8 lg:grid-cols-5">
-            {gereksinimler.map((g, i) => (
+            {s.indirme.gereksinimler.map((g, i) => (
               <motion.div
-                key={g.k}
+                key={g.baslik}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
                 <dt className="font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
-                  {g.k}
+                  {g.baslik}
                 </dt>
-                <dd className="mt-1.5 text-sm text-slate-200">{g.v}</dd>
+                <dd className="mt-1.5 text-sm text-slate-200">{g.deger}</dd>
               </motion.div>
             ))}
           </dl>
