@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import type { SurumBilgisi } from "@/lib/github";
+import { IndirIkonu } from "./IndirIkonu";
 
 /**
  * Ana sayfanın kapanış şeridi. İndirme kartının kendisi /indir sayfasında;
@@ -12,9 +13,7 @@ export function DownloadCta({ surum }: { surum: SurumBilgisi }) {
     <section className="relative px-4 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-brand-500/25 bg-gradient-to-b from-brand-900/45 to-ink-2/80 p-6 backdrop-blur-xl sm:p-10">
-            <span className="pointer-events-none absolute -top-28 left-1/2 size-[30rem] -translate-x-1/2 rounded-full bg-brand-500/15 blur-[100px]" />
-
+          <div className="relative overflow-hidden rounded-3xl border border-line bg-ink-2 p-6 sm:p-10">
             <div className="relative flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="font-display text-[1.5rem] leading-tight font-semibold tracking-tight text-white sm:text-3xl">
@@ -28,18 +27,13 @@ export function DownloadCta({ surum }: { surum: SurumBilgisi }) {
 
                 <Link
                   href="/indir"
-                  className="group relative mt-7 inline-flex overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-3.5 font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50"
+                  className="btn btn-primary btn-indir mt-7 flex-wrap gap-y-1 px-6 py-3.5"
                 >
-                  <span className="relative z-10 flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-y-0.5">
-                      <path d="M12 3v13M6 11l6 6 6-6M4 21h16" />
-                    </svg>
-                    İndirme sayfasına git
-                    <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
-                      v{surum.surum}
-                    </span>
+                  <IndirIkonu />
+                  İndirme sayfasına git
+                  <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
+                    v{surum.surum}
                   </span>
-                  <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-white/30 opacity-0 transition-opacity group-hover:animate-shimmer group-hover:opacity-100" />
                 </Link>
               </div>
 

@@ -3,7 +3,6 @@ import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { surumBilgisiniAl } from "@/lib/github";
-import { Backdrop } from "@/components/Backdrop";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
@@ -49,13 +48,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#04060d",
+  themeColor: "#0a0a0b",
   // Mobil tarayıcı kendi arayüzünü ve form denetimlerini koyu şemaya göre çizsin.
   colorScheme: "dark",
 };
 
-// Arka plan, başlık ve altbilgi her sayfada aynı; düzende duruyorlar ki
-// sayfalar arası geçişte yeniden kurulmasınlar.
+// Başlık ve altbilgi her sayfada aynı; düzende duruyorlar ki sayfalar arası
+// geçişte yeniden kurulmasınlar. Arka plan düz renk, globals.css'te body'de.
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -64,7 +63,6 @@ export default async function RootLayout({
   return (
     <html lang="tr" className={`${sora.variable} ${inter.variable}`}>
       <body className="antialiased">
-        <Backdrop />
         <Nav />
         {children}
         <Footer surum={surum} />

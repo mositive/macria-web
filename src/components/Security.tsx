@@ -34,8 +34,6 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
   if (!vt && !surum.sha256) {
     return (
       <div className="glass relative overflow-hidden rounded-2xl border-dashed p-5 sm:p-10">
-        <span className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-brand-500/10 blur-[90px]" />
-
         <div className="relative">
           <div className="font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
             VirusTotal
@@ -82,8 +80,6 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
 
     return (
       <div className="glass relative overflow-hidden rounded-2xl border-dashed p-5 sm:p-10">
-        <span className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-brand-500/10 blur-[90px]" />
-
         <div className="relative">
           <div className="font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
             VirusTotal
@@ -161,8 +157,6 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
       rel="noreferrer"
       className="group glass relative block overflow-hidden rounded-2xl p-5 transition-colors hover:border-brand-400/40 sm:p-10"
     >
-      <span className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-brand-500/10 blur-[90px]" />
-
       <div className="relative flex flex-col gap-6 sm:gap-8 md:flex-row md:items-center md:justify-between">
         {/* Mobilde alt alta: oran + ayraç + açıklama tek satıra sığmıyordu. */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
@@ -202,7 +196,10 @@ function VirusTotalPaneli({ surum }: { surum: SurumBilgisi }) {
           </div>
         </div>
 
-        <span className="inline-flex shrink-0 items-center justify-center gap-2 self-stretch rounded-xl border border-line bg-white/[0.03] px-5 py-3.5 text-sm font-medium text-slate-200 transition-all group-hover:border-brand-400/50 group-hover:text-white md:self-auto md:py-3">
+        {/* Kartın tamamı bağlantı; bu kutu düğme gibi görünüyor ama hover'ı
+            kendi değil kartın üzerinden tetikleniyor — o yüzden btn-secondary
+            yerine yalnızca iskeleti (btn) alıp durumları group-hover veriyor. */}
+        <span className="btn shrink-0 self-stretch border border-line bg-white/[0.035] px-5 py-3.5 text-sm text-slate-300 transition-all group-hover:border-[#3f3f47] group-hover:bg-white/[0.075] group-hover:text-white md:self-auto md:py-3">
           Raporu aç
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
             <path d="M5 12h14M13 6l6 6-6 6" />

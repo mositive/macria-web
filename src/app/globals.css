@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #04060d;
-  --color-ink-2: #070b17;
-  --color-ink-3: #0b1120;
-  --color-line: #16203a;
+  /* Sayfa düz siyah-antrasit; katmanlar birkaç ton açılarak ayrışıyor.
+     Ton nötr tutuldu, mavi yalnızca vurgu olarak kullanılıyor. */
+  --color-ink: #0a0a0b;
+  --color-ink-2: #131316;
+  --color-ink-3: #1b1b1f;
+  --color-line: #2a2a2e;
 
   --color-brand-950: #050b1c;
   --color-brand-900: #071744;
@@ -20,29 +22,38 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "Consolas", monospace;
 
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-drift: drift 26s linear infinite;
-  --animate-spin-slow: spin 22s linear infinite;
+  --animate-float: float 9s ease-in-out infinite;
   --animate-pulse-ring: pulse-ring 3.2s ease-out infinite;
-  --animate-shimmer: shimmer 2.6s linear infinite;
+  /* Hero'nun alt köşelerindeki ışıklar: farklı süreler seçildi ki ikisi
+     aynı anda tepe noktasına gelip nabız gibi atmasın. */
+  --animate-glow-left: glow-left 8s ease-in-out infinite;
+  --animate-glow-right: glow-right 10s ease-in-out infinite;
 }
 
+/* Süzülme genliği 20 px'ti; logo sallanıyor gibi duruyordu. */
 @keyframes float {
-  0%, 100% { transform: translateY(-10px); }
-  50% { transform: translateY(10px); }
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
 }
-@keyframes drift {
-  from { background-position: 0 0; }
-  to { background-position: 0 -800px; }
+/* Hareket yalnızca yatayda: kayma X ekseninde, büyüme de scaleX ile — düz
+   scale kullanmak ışığı yukarı doğru da şişiriyordu. Üç duraklı, tepe noktası
+   ortada değil; böylece gidiş-dönüş aynı ritimde olmuyor. */
+@keyframes glow-left {
+  0%, 100% { transform: translate3d(0, 0, 0) scaleX(0.9); opacity: 0.45; }
+  35% { transform: translate3d(5%, 0, 0) scaleX(1.14); opacity: 0.9; }
+  65% { transform: translate3d(9%, 0, 0) scaleX(1.28); opacity: 1; }
+}
+/* Sağdaki, soldakinin X ekseninde aynadaki hali; süreleri farklı olduğu için
+   ikisi aynı anda tepe yapmıyor. */
+@keyframes glow-right {
+  0%, 100% { transform: translate3d(0, 0, 0) scaleX(0.9); opacity: 0.45; }
+  35% { transform: translate3d(-5%, 0, 0) scaleX(1.14); opacity: 0.9; }
+  65% { transform: translate3d(-9%, 0, 0) scaleX(1.28); opacity: 1; }
 }
 @keyframes pulse-ring {
   0% { transform: scale(0.85); opacity: 0.55; }
   70% { transform: scale(1.35); opacity: 0; }
   100% { transform: scale(1.35); opacity: 0; }
-}
-@keyframes shimmer {
-  from { transform: translateX(-120%); }
-  to { transform: translateX(220%); }
 }
 
 html {
@@ -62,7 +73,7 @@ html {
 
 body {
   background-color: var(--color-ink);
-  color: #dbe4f5;
+  color: #d4d4d8;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -87,25 +98,157 @@ body {
 /* Kaydırma çubuğu süsü yalnızca imleçli/geniş ekranlarda; mobilde yer kaplamasın. */
 @media (min-width: 768px) {
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #05080f; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-brand-700), var(--color-brand-500));
+  background: #33333a;
   border-radius: 999px;
-  border: 2px solid #05080f;
+  border: 2px solid var(--color-ink);
 }
+::-webkit-scrollbar-thumb:hover { background: #45454d; }
 }
 
-@utility text-gradient {
-  background-image: linear-gradient(100deg, #ffffff 0%, #9cc4ff 42%, var(--color-accent) 100%);
+/* Başlıktaki vurgu satırı: logonun mavi tonları arasında gezinen bir gradyan.
+   Tek renk yerine tek AİLE — beyaz/camgöbeği karışımı değil, hepsi markanın
+   mavisi.
+
+   Döngünün dikişsiz kapanması iki şeye bağlı:
+   1) Desen tam olarak bir döşeme boyu (16em) kayıyor ve arka plan tekrarlı;
+      bitiş karesi başlangıçla birebir aynı duruma denk geliyor.
+   2) Gradyanın ilk ve son durağı aynı ton, yani döşemelerin ek yerinde de
+      renk sıçraması yok.
+   Ölçü yüzde değil em: yüzdelik konum, kutu ile görüntü arasındaki FARKA
+   oranlanıyor — "bir tur" demek olmadığı için sonda zıplıyordu. em ise
+   yazının punto'suna bağlı gerçek bir kaydırma, üstelik başlık küçüldükçe
+   desen de onunla küçülüyor. */
+@utility text-brand-sweep {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-400) 0%,
+    var(--color-brand-300) 18%,
+    #cfe2ff 32%,
+    var(--color-brand-300) 46%,
+    var(--color-brand-500) 72%,
+    var(--color-brand-400) 100%
+  );
+  background-size: 16em 100%;
+  background-repeat: repeat;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  animation: text-sweep 7s linear infinite;
 }
 
+@keyframes text-sweep {
+  from { background-position-x: 0em; }
+  to { background-position-x: 16em; }
+}
+
+/* Yüzeyler düz: gradyan ve blur yerine tek ton, arka plandan bir kademe açık. */
 @utility glass {
-  background: linear-gradient(160deg, rgba(23, 42, 84, 0.42), rgba(7, 12, 26, 0.72));
-  border: 1px solid rgba(76, 122, 214, 0.18);
-  backdrop-filter: blur(14px);
+  background: var(--color-ink-2);
+  border: 1px solid var(--color-line);
+}
+
+/* --- Düğmeler ---
+   Aynı sınıf yığını beş ayrı dosyada tekrarlanıyordu, tek tanıma indirildi.
+   Ortak iskelet "btn"de; renk şeması "btn-primary" / "btn-secondary"da.
+   Dolgu (px/py) çağrı yerinde kalıyor, düğmeden düğmeye değişiyor. */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  transition-property: background-color, background-image, border-color, box-shadow, color, transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Soldan sağa üç renkli gradyan yerine dikeyde tek tonluk geçiş: üstte 1 px
+   ışık çizgisi, kenarda ince lacivert halka, altta yumuşak bir düşüm.
+   Basınca gölge içeri çöküyor — düğme gerçekten bastırılmış gibi duruyor.
+
+   Gölgenin yayılması (spread) eksi değil: -14px gibi bir daraltma, 24px'lik
+   bulanıklıkla birleşince düğmenin altında kendi başına duran koyu mavi bir
+   çubuk bırakıyordu. Artık geniş, düşük opaklıklı ve yumuşak — parlama değil,
+   düğmenin masaya düşürdüğü ışık. */
+@utility btn-primary {
+  background-image: linear-gradient(180deg, var(--color-brand-500), var(--color-brand-700));
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 0 1px var(--color-brand-800),
+    0 2px 6px rgba(0, 0, 0, 0.45);
+
+  &:hover {
+    background-image: linear-gradient(180deg, var(--color-brand-400), var(--color-brand-600));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 0 0 1px var(--color-brand-700),
+      0 2px 6px rgba(0, 0, 0, 0.45),
+      0 8px 28px rgba(31, 107, 240, 0.35);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    background-image: linear-gradient(180deg, var(--color-brand-600), var(--color-brand-700));
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.4),
+      0 0 0 1px var(--color-brand-800);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-300);
+    outline-offset: 3px;
+  }
+}
+
+@utility btn-secondary {
+  border: 1px solid var(--color-line);
+  background-color: rgba(255, 255, 255, 0.035);
+  color: #d4d4d8;
+
+  &:hover {
+    border-color: #3f3f47;
+    background-color: rgba(255, 255, 255, 0.075);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 3px;
+  }
+}
+
+/* İndirme düğmelerindeki ok. Fareyle üstüne gelindiğinde tepsiye doğru düşüp
+   görünmez olurken üstten yenisi giriyor; tepsi çizgisi yerinde duruyor.
+   Animasyon tekrarsız, yani her hover'da bir kez oynayıp bitiyor.
+   transform-box: fill-box olmadan SVG içindeki grup, tuvalin sol üst köşesine
+   göre dönüşüyor ve ok kutunun dışına fırlıyor. */
+.indir-ok {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.btn-indir:hover .indir-ok {
+  animation: indir-ok 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes indir-ok {
+  0% { transform: translateY(0); opacity: 1; }
+  40% { transform: translateY(8px); opacity: 0; }
+  60% { transform: translateY(-8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import type { SurumBilgisi } from "@/lib/github";
+import { IndirIkonu } from "./IndirIkonu";
 
 const gereksinimler = [
   { k: "İşletim sistemi", v: "Windows 10 / 11 · x64" },
@@ -21,22 +22,8 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-brand-500/25 bg-gradient-to-b from-brand-900/45 to-ink-2/80 p-6 backdrop-blur-xl sm:p-12"
+          className="relative overflow-hidden rounded-3xl border border-line bg-ink-2 p-6 sm:p-12"
         >
-          {/* arka plan efektleri */}
-          <div className="pointer-events-none absolute -top-32 left-1/2 size-[34rem] -translate-x-1/2 rounded-full bg-brand-500/18 blur-[110px]" />
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.35]"
-            style={{
-              backgroundImage:
-                "linear-gradient(30deg, rgba(63,141,255,0.12) 1px, transparent 1px)," +
-                "linear-gradient(150deg, rgba(63,141,255,0.12) 1px, transparent 1px)",
-              backgroundSize: "56px 33px, 56px 33px",
-              maskImage: "radial-gradient(70% 60% at 50% 0%, #000, transparent)",
-              WebkitMaskImage: "radial-gradient(70% 60% at 50% 0%, #000, transparent)",
-            }}
-          />
-
           <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto]">
             <div>
               <h2 className="font-display text-[1.65rem] leading-tight font-semibold tracking-tight text-white sm:text-4xl">
@@ -50,25 +37,20 @@ export function Download({ surum }: { surum: SurumBilgisi }) {
               <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
                   href={surum.indirmeUrl}
-                  className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-4 font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50 sm:px-7"
+                  className="btn btn-primary btn-indir flex-wrap gap-y-1 px-6 py-4 sm:px-7"
                 >
-                  <span className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-y-0.5">
-                      <path d="M12 3v13M6 11l6 6 6-6M4 21h16" />
-                    </svg>
-                    Macria.exe indir
-                    <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
-                      v{surum.surum}
-                    </span>
+                  <IndirIkonu boyut={18} />
+                  Macria.exe indir
+                  <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[11px]">
+                    v{surum.surum}
                   </span>
-                  <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-white/30 opacity-0 transition-opacity group-hover:animate-shimmer group-hover:opacity-100" />
                 </a>
 
                 <a
                   href={surum.tumSurumlerUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl border border-line bg-white/[0.04] px-6 py-4 text-center font-medium text-slate-200 transition-all hover:border-brand-400/45 hover:bg-white/[0.08] hover:text-white"
+                  className="btn btn-secondary px-6 py-4"
                 >
                   Tüm sürümler
                 </a>

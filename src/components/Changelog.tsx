@@ -146,7 +146,7 @@ export function Changelog({ gecmis }: { gecmis: SurumKaydi[] }) {
             <button
               type="button"
               onClick={() => setHepsi(true)}
-              className="rounded-xl border border-line bg-white/[0.03] px-5 py-3.5 text-sm font-medium text-slate-200 transition-all hover:border-brand-400/45 hover:bg-white/[0.06] hover:text-white"
+              className="btn btn-secondary px-5 py-3.5 text-sm"
             >
               Önceki {kalan} sürümü göster
             </button>

@@ -45,9 +45,7 @@ export function Support() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-8 sm:mt-10">
-          <div className="relative overflow-hidden rounded-3xl border border-brand-500/25 bg-gradient-to-b from-brand-900/45 to-ink-2/80 p-6 backdrop-blur-xl sm:p-9">
-            <span className="pointer-events-none absolute -top-28 left-1/2 size-[26rem] -translate-x-1/2 rounded-full bg-brand-500/15 blur-[100px]" />
-
+          <div className="relative overflow-hidden rounded-3xl border border-line bg-ink-2 p-6 sm:p-9">
             <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase">
@@ -64,25 +62,20 @@ export function Support() {
                     href={support.shopier.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="group relative block overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 px-6 py-4 text-center font-medium text-white shadow-xl shadow-brand-600/35 transition-all hover:shadow-2xl hover:shadow-brand-500/50 sm:px-7"
+                    className="btn btn-primary px-6 py-4 sm:px-7"
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-2.5">
-                      Destek ol
-                      <DisBaglantiIkonu />
-                    </span>
-                    <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-white/30 opacity-0 transition-opacity group-hover:animate-shimmer group-hover:opacity-100" />
+                    Destek ol
+                    <DisBaglantiIkonu />
                   </a>
                 ) : (
                   // Devre dışıyken bağlantı değil düz bir kutu: tıklanamaz,
                   // Tab ile odaklanılamaz, ekran okuyucuya da link demez.
                   <div
                     aria-disabled="true"
-                    className="cursor-not-allowed rounded-xl border border-line bg-white/[0.04] px-6 py-4 text-center font-medium text-slate-500 select-none sm:px-7"
+                    className="btn cursor-not-allowed border border-line bg-white/[0.03] px-6 py-4 text-slate-500 select-none sm:px-7"
                   >
-                    <span className="flex items-center justify-center gap-2.5">
-                      Destek ol
-                      <DisBaglantiIkonu />
-                    </span>
+                    Destek ol
+                    <DisBaglantiIkonu />
                   </div>
                 )}
 
